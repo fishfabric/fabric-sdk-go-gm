@@ -9,7 +9,7 @@ package msp
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/msp"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 )
 
 // TODO Add tests

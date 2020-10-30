@@ -12,14 +12,14 @@ import (
 	"testing"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric-sdk-go/pkg/client/ledger"
-	"github.com/hyperledger/fabric-sdk-go/pkg/common/errors/retry"
-	"github.com/hyperledger/fabric-sdk-go/pkg/common/errors/status"
-	providersFab "github.com/hyperledger/fabric-sdk-go/pkg/common/providers/fab"
-	"github.com/hyperledger/fabric-sdk-go/pkg/core/config"
-	"github.com/hyperledger/fabric-sdk-go/pkg/fab"
-	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
-	"github.com/hyperledger/fabric-sdk-go/test/integration"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/ledger"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
+	providersFab "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
 	"github.com/stretchr/testify/require"
 )
 

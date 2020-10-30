@@ -18,8 +18,8 @@ import (
 	"time"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric-sdk-go/pkg/common/logging"
-	"github.com/hyperledger/fabric-sdk-go/pkg/fab/resource"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/resource"
 	"github.com/pkg/errors"
 )
 

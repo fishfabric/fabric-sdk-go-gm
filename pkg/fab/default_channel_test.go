@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/fab"
-	"github.com/hyperledger/fabric-sdk-go/pkg/core/config"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config"
 	"github.com/stretchr/testify/assert"
 )
 

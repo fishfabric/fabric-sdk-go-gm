@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric-sdk-go/test/metadata"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
 )
 
 func TestExtractChannelConfig(t *testing.T) {

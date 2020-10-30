@@ -9,8 +9,8 @@ package dynamicdiscovery
 import (
 	"time"
 
-	coptions "github.com/hyperledger/fabric-sdk-go/pkg/common/options"
-	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/fab"
+	coptions "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 )
 
 type options struct {

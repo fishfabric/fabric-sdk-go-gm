@@ -11,7 +11,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/hyperledger/fabric-sdk-go/pkg/core/logging/api"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/logging/api"
 )
 
 func TestCallerInfoSetting(t *testing.T) {

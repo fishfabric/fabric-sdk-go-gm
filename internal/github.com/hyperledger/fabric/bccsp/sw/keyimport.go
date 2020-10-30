@@ -17,7 +17,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/hyperledger/fabric-sdk-go/internal/github.com/hyperledger/fabric/bccsp"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 )
 
 type aes256ImportKeyOptsKeyImporter struct{}
