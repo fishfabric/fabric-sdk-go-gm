@@ -12,11 +12,11 @@ import (
 	"time"
 
 	"github.com/hyperledger/fabric-protos-go/common"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/comm"
-	"github.com/pkg/errors"
 )
 
 // WithTargets allows overriding of the target peers for the request.

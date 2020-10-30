@@ -33,9 +33,9 @@ import (
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/chconfig"
 
+	"github.com/pkg/errors"
 	contextImpl "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/channel"
-	"github.com/pkg/errors"
 )
 
 // Client enables ledger queries on a Fabric network.

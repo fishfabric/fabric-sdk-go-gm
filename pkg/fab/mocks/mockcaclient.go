@@ -7,9 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 package mocks
 
 import (
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/api"
-	"github.com/pkg/errors"
 )
 
 // MockCAClient is a mock CAClient

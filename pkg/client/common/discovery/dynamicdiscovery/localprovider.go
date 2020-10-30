@@ -7,11 +7,11 @@ SPDX-License-Identifier: Apache-2.0
 package dynamicdiscovery
 
 import (
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	coptions "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazycache"
-	"github.com/pkg/errors"
 )
 
 var logger = logging.NewLogger("fabsdk/client")

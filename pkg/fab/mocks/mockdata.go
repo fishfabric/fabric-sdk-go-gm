@@ -21,9 +21,9 @@ import (
 
 	"time"
 
+	"github.com/pkg/errors"
 	channelConfig "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/channelconfig"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkinternal/pkg/txflags"
-	"github.com/pkg/errors"
 )
 
 // NewSimpleMockBlock returns a simple mock block

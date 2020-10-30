@@ -7,10 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package multisuite
 
 import (
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite/bccsp/pkcs11"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite/bccsp/sw"
-	"github.com/pkg/errors"
 )
 
 //GetSuiteByConfig returns cryptosuite adaptor for bccsp loaded according to given config

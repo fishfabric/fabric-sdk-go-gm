@@ -9,11 +9,11 @@ package expiredpeer
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 
 	mspclient "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/resmgmt"

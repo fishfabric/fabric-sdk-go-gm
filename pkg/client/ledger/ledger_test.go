@@ -9,6 +9,8 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 	txnmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/mocks"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
@@ -16,8 +18,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
 	fcmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/assert"
 )
 
 const (

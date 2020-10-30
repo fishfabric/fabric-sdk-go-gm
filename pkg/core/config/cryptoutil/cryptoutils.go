@@ -14,9 +14,9 @@ import (
 	"encoding/pem"
 	"io"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
-	"github.com/pkg/errors"
 
 	factory "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/cryptosuitebridge"
 )

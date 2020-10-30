@@ -13,11 +13,11 @@ import (
 
 	"github.com/golang/protobuf/proto"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/channelconfig"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/protoutil"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkinternal/configtxgen/encoder"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkinternal/configtxlator/update"
-	"github.com/pkg/errors"
 
 	localconfig "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkinternal/configtxgen/genesisconfig"
 

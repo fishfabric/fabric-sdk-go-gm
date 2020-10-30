@@ -7,8 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 package msp
 
 import (
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 	"github.com/pkg/errors"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 )
 
 var (

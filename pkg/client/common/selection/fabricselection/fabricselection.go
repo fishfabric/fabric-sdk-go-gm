@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/hyperledger/fabric-protos-go/discovery"
+	"github.com/pkg/errors"
 	discclient "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/discovery/client"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/random"
 	soptions "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/selection/options"
@@ -28,7 +29,6 @@ import (
 	fabdiscovery "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/discovery"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazycache"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazyref"
-	"github.com/pkg/errors"
 )
 
 const (

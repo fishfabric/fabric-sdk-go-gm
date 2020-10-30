@@ -15,6 +15,8 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/peer"
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/context"
@@ -22,8 +24,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/resource"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/require"
 )
 
 const (

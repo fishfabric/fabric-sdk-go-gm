@@ -17,6 +17,7 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
 
 	"github.com/hyperledger/fabric-protos-go/common"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
@@ -25,7 +26,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/peer"
 	mspmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
-	"github.com/pkg/errors"
 )
 
 const testAddress = "127.0.0.1:0"

@@ -10,12 +10,12 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	contextApi "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/api"
-	"github.com/pkg/errors"
 )
 
 var logger = logging.NewLogger("fabsdk/msp")

@@ -9,9 +9,9 @@ package cfg
 import (
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/lookup"
-	"github.com/pkg/errors"
 )
 
 // MetricsConfig contains operations system and metrics configuration

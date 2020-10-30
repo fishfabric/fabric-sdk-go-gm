@@ -31,8 +31,8 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/utils"
 	"github.com/pkg/errors"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/utils"
 )
 
 type validity struct {

@@ -12,10 +12,10 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/keyvaluestore"
-	"github.com/pkg/errors"
 )
 
 // NewFileKeyStore loads keys stored in the cryptoconfig directory layout.

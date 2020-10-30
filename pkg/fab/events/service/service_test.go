@@ -21,10 +21,10 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/dispatcher"
 	servicemocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/mocks"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/blockfilter/headertypefilter"
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/pkg/errors"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/blockfilter/headertypefilter"
 )
 
 var (

@@ -17,6 +17,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
@@ -28,7 +29,6 @@ import (
 	logApi "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/logging/api"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/pathvar"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
-	"github.com/pkg/errors"
 )
 
 // endpointconfig_override_test.go is an example of programmatically configuring the sdk by injecting instances that implement EndpointConfig's functions (representing the sdk's configs)

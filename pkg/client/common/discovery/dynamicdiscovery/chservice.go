@@ -7,6 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package dynamicdiscovery
 
 import (
+	"github.com/pkg/errors"
 	discclient "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/discovery/client"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/random"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/multi"
@@ -15,7 +16,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	reqContext "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/context"
 	fabdiscovery "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/discovery"
-	"github.com/pkg/errors"
 )
 
 // ChannelService implements a dynamic Discovery Service that queries

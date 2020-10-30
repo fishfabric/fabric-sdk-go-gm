@@ -22,11 +22,11 @@ import (
 
 	"strings"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	mspctx "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp"
 	mspapi "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/api"
-	"github.com/pkg/errors"
 )
 
 // Client enables access to Client services

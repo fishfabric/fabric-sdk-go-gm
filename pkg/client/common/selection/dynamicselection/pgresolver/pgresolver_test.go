@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
+	common "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/policydsl"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	mocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
-	common "github.com/hyperledger/fabric-protos-go/common"
 )
 
 const (

@@ -12,9 +12,9 @@ import (
 	"io"
 	"time"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/multi"
 	"github.com/pkg/errors"
 	"github.com/spf13/cast"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/multi"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"

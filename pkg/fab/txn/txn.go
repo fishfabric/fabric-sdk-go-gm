@@ -11,8 +11,8 @@ import (
 	reqContext "context"
 	"math/rand"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/multi"
 	"github.com/pkg/errors"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/multi"
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"

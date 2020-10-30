@@ -12,6 +12,7 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/channel"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config"
@@ -22,7 +23,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/provider/chpvdr"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
-	"github.com/pkg/errors"
 )
 
 const (

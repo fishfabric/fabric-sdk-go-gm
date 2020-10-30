@@ -21,6 +21,7 @@ import (
 
 	kitstatsd "github.com/go-kit/kit/metrics/statsd"
 	"github.com/hyperledger/fabric-lib-go/healthz"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/metrics"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/metrics/disabled"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/metrics/prometheus"
@@ -30,7 +31,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/core/middleware"
 	flogging "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/logbridge"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/logbridge/httpadmin"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 //go:generate counterfeiter -o fakes/logger.go -fake-name Logger . Logger

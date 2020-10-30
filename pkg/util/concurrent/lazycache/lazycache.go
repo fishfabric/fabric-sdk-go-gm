@@ -11,11 +11,11 @@ import (
 	"sync"
 	"sync/atomic"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/futurevalue"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazyref"
-	"github.com/pkg/errors"
 )
 
 var logger = logging.NewLogger("fabsdk/util")

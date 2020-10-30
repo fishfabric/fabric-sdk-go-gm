@@ -11,12 +11,12 @@ package chpvdr
 import (
 	"sync"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/chconfig"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazycache"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazyref"
-	"github.com/pkg/errors"
 )
 
 // SetChannelConfig allows setting channel configuration.

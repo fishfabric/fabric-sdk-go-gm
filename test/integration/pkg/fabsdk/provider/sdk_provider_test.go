@@ -12,6 +12,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/channel"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/selection/dynamicselection"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
@@ -24,7 +25,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/provider/chpvdr"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
-	"github.com/stretchr/testify/require"
 )
 
 func TestDynamicSelection(t *testing.T) {

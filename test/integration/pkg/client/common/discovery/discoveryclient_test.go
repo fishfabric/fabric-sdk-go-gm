@@ -13,6 +13,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	mspclient "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/resmgmt"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
@@ -23,9 +26,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/discovery"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 
 	fabdiscovery "github.com/hyperledger/fabric-protos-go/discovery"
 	discclient "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/discovery/client"

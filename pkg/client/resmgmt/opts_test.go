@@ -11,9 +11,9 @@ import (
 
 	"time"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	fcmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestWithTargetURLsInvalid(t *testing.T) {

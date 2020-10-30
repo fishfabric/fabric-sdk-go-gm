@@ -16,12 +16,12 @@ import (
 	"github.com/golang/protobuf/proto"
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/protoutil"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkinternal/pkg/txflags"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
-	"github.com/pkg/errors"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

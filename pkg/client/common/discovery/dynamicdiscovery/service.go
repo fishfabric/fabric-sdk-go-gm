@@ -10,13 +10,13 @@ import (
 	"sync"
 	"time"
 
+	"github.com/pkg/errors"
 	discclient "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/discovery/client"
 	coptions "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	contextAPI "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	fabdiscovery "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/discovery"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazyref"
-	"github.com/pkg/errors"
 )
 
 // clientProvider is overridden by unit tests

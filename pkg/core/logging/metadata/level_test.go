@@ -8,8 +8,8 @@ package metadata
 import (
 	"testing"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/logging/api"
 	"github.com/stretchr/testify/assert"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/logging/api"
 )
 
 func TestLogLevels(t *testing.T) {

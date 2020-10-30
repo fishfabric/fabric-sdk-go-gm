@@ -11,11 +11,11 @@ import (
 
 	"fmt"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestIdentity(t *testing.T) {

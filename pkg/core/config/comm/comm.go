@@ -11,9 +11,9 @@ import (
 
 	"crypto/x509"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite"
-	"github.com/pkg/errors"
 )
 
 // TLSConfig returns the appropriate config for TLS including the root CAs,

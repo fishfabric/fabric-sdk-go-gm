@@ -19,6 +19,7 @@ import (
 	reqContext "context"
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/channel/invoke"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/discovery/greylist"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/filter"
@@ -29,7 +30,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	contextImpl "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/metrics"
-	"github.com/pkg/errors"
 )
 
 // Client enables access to a channel on a Fabric network.

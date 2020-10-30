@@ -11,12 +11,12 @@ import (
 	"time"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/channel/invoke"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/comm"
-	"github.com/pkg/errors"
 )
 
 // opts allows the user to specify more advanced options

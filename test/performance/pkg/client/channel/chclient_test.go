@@ -16,6 +16,7 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/testdata"
 
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/channel"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
@@ -24,11 +25,10 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/provider/chpvdr"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/pathvar"
-	"github.com/stretchr/testify/require"
 
+	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/third_party/github.com/hyperledger/fabric/common/policydsl"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/third_party/github.com/hyperledger/fabric/core/common/ccprovider"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 const (

@@ -13,8 +13,8 @@ import (
 
 	"github.com/spf13/viper"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/pkg/errors"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 )

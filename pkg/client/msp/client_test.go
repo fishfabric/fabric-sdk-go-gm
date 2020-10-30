@@ -17,6 +17,8 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	contextApi "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
@@ -29,8 +31,6 @@ import (
 	mspImpl "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 const (

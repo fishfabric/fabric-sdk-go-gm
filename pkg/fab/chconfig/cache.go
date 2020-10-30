@@ -7,10 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package chconfig
 
 import (
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazycache"
-	"github.com/pkg/errors"
 )
 
 // Provider provides ChannelConfig

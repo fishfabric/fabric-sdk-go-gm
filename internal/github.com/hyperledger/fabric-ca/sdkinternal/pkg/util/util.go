@@ -311,7 +311,7 @@ func GetMaskedURL(url string) string {
 				matchStr = strings.Replace(matchStr, matches[idx], "****", 1)
 			}
 		}
-		url = url[:matchIdxs[0]] + matchStr + url[matchIdxs[1]:len(url)]
+		url = url[:matchIdxs[0]] + matchStr + url[matchIdxs[1]:]
 	}
 	return url
 }

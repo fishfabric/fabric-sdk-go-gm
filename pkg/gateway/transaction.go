@@ -9,11 +9,11 @@ package gateway
 import (
 	"github.com/hyperledger/fabric-protos-go/peer"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/channel"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/channel/invoke"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
-	"github.com/pkg/errors"
 )
 
 // A Transaction represents a specific invocation of a transaction function, and provides

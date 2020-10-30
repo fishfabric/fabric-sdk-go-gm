@@ -12,6 +12,8 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
 	contextAPI "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
@@ -22,8 +24,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/txn"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/require"
 )
 
 // TestTransient ...

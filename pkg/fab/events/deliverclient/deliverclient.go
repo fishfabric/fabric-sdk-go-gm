@@ -11,6 +11,7 @@ import (
 	"time"
 
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	fabcontext "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
@@ -21,7 +22,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/deliverclient/dispatcher"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/deliverclient/seek"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/endpoint"
-	"github.com/pkg/errors"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

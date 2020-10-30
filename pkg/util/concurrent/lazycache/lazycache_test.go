@@ -15,9 +15,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazyref"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazyref"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/test"
 )

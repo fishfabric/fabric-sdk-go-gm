@@ -17,13 +17,13 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
+	pb "github.com/hyperledger/fabric-protos-go/peer"
 	txnmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/mocks"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	fcmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 const (

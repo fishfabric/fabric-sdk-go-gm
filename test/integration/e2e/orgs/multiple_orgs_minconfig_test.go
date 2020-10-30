@@ -12,6 +12,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/discovery/dynamicdiscovery"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
@@ -24,8 +26,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/provider/chpvdr"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 const (

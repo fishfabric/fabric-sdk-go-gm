@@ -9,8 +9,8 @@ package comm
 import (
 	"strings"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/pkg/errors"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 )
 
 // NetworkPeerConfig fetches the peer configuration based on a key (name or URL).

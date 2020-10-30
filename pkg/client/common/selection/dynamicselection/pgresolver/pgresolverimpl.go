@@ -13,9 +13,9 @@ import (
 	"github.com/golang/protobuf/proto"
 	common "github.com/hyperledger/fabric-protos-go/common"
 	mb "github.com/hyperledger/fabric-protos-go/msp"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
-	"github.com/pkg/errors"
 )
 
 const loggerModule = "fabsdk/client"

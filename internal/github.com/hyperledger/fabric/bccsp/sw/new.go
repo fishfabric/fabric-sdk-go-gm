@@ -16,8 +16,8 @@ import (
 	"crypto/sha512"
 	"reflect"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 	"github.com/pkg/errors"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 	"golang.org/x/crypto/sha3"
 )
 

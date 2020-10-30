@@ -13,6 +13,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/multi"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
@@ -23,9 +26,6 @@ import (
 	lcpackager "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/ccpackager/lifecycle"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 
 	mb "github.com/hyperledger/fabric-protos-go/msp"
 	pb "github.com/hyperledger/fabric-protos-go/peer"

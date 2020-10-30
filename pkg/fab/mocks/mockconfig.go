@@ -17,11 +17,11 @@ import (
 
 	"crypto/x509"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/test/mockfab"
 	commtls "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/comm/tls"
-	"github.com/pkg/errors"
 )
 
 // MockConfig ...

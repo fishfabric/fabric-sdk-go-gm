@@ -10,6 +10,7 @@ import (
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	fabcontext "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
@@ -18,7 +19,6 @@ import (
 	clientdisp "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/client/dispatcher"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/deliverclient/connection"
 	esdispatcher "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/dispatcher"
-	"github.com/pkg/errors"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

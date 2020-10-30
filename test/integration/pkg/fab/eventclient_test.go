@@ -13,13 +13,13 @@ import (
 	"testing"
 	"time"
 
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/client"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/deliverclient"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/test"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/require"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/deliverclient/seek"

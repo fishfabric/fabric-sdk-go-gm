@@ -15,6 +15,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/mitchellh/mapstructure"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/multi"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
@@ -27,8 +29,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/lookup"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/pathvar"
-	"github.com/mitchellh/mapstructure"
-	"github.com/pkg/errors"
 	grpcCodes "google.golang.org/grpc/codes"
 )
 

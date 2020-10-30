@@ -10,11 +10,11 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	txnmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/mocks"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	fcmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestSignatureValidationHandlerSuccess(t *testing.T) {

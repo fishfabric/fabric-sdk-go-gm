@@ -17,6 +17,9 @@ import (
 	"time"
 
 	"github.com/golang/mock/gomock"
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/discovery/dynamicdiscovery"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/selection/fabricselection"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/resmgmt"
@@ -33,9 +36,6 @@ import (
 	mockapisdk "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/test/mocksdkapi"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 const (

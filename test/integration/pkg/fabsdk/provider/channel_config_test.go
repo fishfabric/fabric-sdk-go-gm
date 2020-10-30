@@ -14,6 +14,7 @@ import (
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/resource"
 
+	"github.com/stretchr/testify/require"
 	contextAPI "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/context"
@@ -27,7 +28,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/provider/fabpvdr"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
-	"github.com/stretchr/testify/require"
 )
 
 func TestChannelConfig(t *testing.T) {

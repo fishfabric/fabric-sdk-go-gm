@@ -18,13 +18,13 @@ import (
 
 	"reflect"
 
+	"github.com/mitchellh/mapstructure"
+	"github.com/spf13/viper"
+	"github.com/stretchr/testify/assert"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/mocks"
-	"github.com/mitchellh/mapstructure"
-	"github.com/spf13/viper"
-	"github.com/stretchr/testify/assert"
 )
 
 var sampleConfigFile = filepath.Join("..", "testdata", "config_test_entity_matchers.yaml")

@@ -14,6 +14,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/pkg/errors"
+	"github.com/spf13/viper"
+	"github.com/stretchr/testify/assert"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	fabImpl "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config"
@@ -21,9 +24,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/mocks"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
-	"github.com/pkg/errors"
-	"github.com/spf13/viper"
-	"github.com/stretchr/testify/assert"
 )
 
 const (

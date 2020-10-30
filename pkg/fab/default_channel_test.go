@@ -12,9 +12,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestDefaultChannelWithDefaultChannelConfiguredAndNoMatchers(t *testing.T) {

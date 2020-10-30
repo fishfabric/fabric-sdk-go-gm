@@ -11,10 +11,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/stretchr/testify/require"
 	eventmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/mocks"
 	fabmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	"github.com/stretchr/testify/require"
 )
 
 func TestConnection(t *testing.T) {

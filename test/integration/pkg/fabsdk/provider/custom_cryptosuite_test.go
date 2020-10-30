@@ -11,6 +11,7 @@ import (
 
 	"fmt"
 
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 	bccspSw "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/factory/sw"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/channel"
@@ -22,7 +23,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/factory/defcore"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
-	"github.com/stretchr/testify/require"
 )
 
 func customCryptoSuiteInit(t *testing.T) (*integration.BaseSetupImpl, string) {

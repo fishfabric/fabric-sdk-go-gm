@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/stretchr/testify/assert"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
 )
 
 func TestRetryRequired(t *testing.T) {

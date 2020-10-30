@@ -27,10 +27,10 @@ import (
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/util"
 	factory "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/cryptosuitebridge"
 	log "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/logbridge"
-	"github.com/pkg/errors"
 )
 
 // DefaultCipherSuites is a set of strong TLS cipher suites

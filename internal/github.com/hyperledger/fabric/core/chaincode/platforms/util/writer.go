@@ -22,9 +22,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkinternal/ccmetadata"
 	flogging "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/logbridge"
-	"github.com/pkg/errors"
 )
 
 var logger = flogging.MustGetLogger("chaincode.platform.util")

@@ -8,10 +8,10 @@ package channel
 import (
 	"testing"
 
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration/util/runner"
-	"github.com/stretchr/testify/require"
 )
 
 const (

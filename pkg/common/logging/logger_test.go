@@ -10,10 +10,10 @@ import (
 	"sync"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/logging/api"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/logging/modlog"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/logging/testdata"
-	"github.com/stretchr/testify/assert"
 )
 
 var moduleName = "module-xyz"

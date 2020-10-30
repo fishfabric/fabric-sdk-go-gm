@@ -9,9 +9,9 @@ package mocks
 import (
 	"fmt"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 	mspmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	"github.com/pkg/errors"
 )
 
 // MockIdentityManager is a mock IdentityManager

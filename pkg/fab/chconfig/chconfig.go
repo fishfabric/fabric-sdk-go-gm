@@ -15,6 +15,7 @@ import (
 	"github.com/hyperledger/fabric-protos-go/common"
 	mb "github.com/hyperledger/fabric-protos-go/msp"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
+	"github.com/pkg/errors"
 	channelConfig "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/channelconfig"
 	imsp "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
@@ -25,7 +26,6 @@ import (
 	contextImpl "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/channel"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/resource"
-	"github.com/pkg/errors"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

@@ -12,13 +12,13 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/channel"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/pathvar"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
-	"github.com/stretchr/testify/require"
 )
 
 //TestMultiOrgWithSingleOrgConfig uses new sdk instance with new config which only has entries for org1.

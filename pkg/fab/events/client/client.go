@@ -11,13 +11,13 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/client/dispatcher"
 	eventservice "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service"
 	esdispatcher "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/dispatcher"
-	"github.com/pkg/errors"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

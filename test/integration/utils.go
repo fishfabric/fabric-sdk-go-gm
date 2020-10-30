@@ -14,6 +14,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/pkg/errors"
 	mspclient "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/resmgmt"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
@@ -23,7 +24,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp"
-	"github.com/pkg/errors"
 )
 
 const (

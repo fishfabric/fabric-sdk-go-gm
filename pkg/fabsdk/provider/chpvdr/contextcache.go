@@ -7,6 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package chpvdr
 
 import (
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/discovery/dynamicdiscovery"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/discovery/staticdiscovery"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/selection/dynamicselection"
@@ -17,7 +18,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/chconfig"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/deliverclient"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazycache"
-	"github.com/pkg/errors"
 )
 
 type cache interface {

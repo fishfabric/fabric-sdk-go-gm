@@ -7,8 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 package cryptosuite
 
 import (
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/pkg/errors"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 )
 
 // CryptoConfigOptions represents CryptoConfig interface with overridable interface functions

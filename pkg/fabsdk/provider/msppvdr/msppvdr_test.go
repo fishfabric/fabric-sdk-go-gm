@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab"
@@ -17,7 +18,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestCreateMSPProvider(t *testing.T) {

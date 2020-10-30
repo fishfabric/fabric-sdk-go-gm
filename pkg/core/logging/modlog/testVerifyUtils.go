@@ -12,9 +12,9 @@ import (
 	"regexp"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/logging/api"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/logging/metadata"
-	"github.com/stretchr/testify/assert"
 )
 
 const (

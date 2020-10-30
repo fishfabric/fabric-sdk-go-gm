@@ -11,6 +11,7 @@ import (
 	"math/rand"
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/core/operations"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	coptions "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
@@ -27,7 +28,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/metrics"
 	metricsCfg "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/metrics/cfg"
 	mspImpl "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp"
-	"github.com/pkg/errors"
 )
 
 var logger = logging.NewLogger("fabsdk")

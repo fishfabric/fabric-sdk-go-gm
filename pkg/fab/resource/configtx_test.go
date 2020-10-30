@@ -13,8 +13,8 @@ import (
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/resource/genesisconfig"
 	"github.com/stretchr/testify/require"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/resource/genesisconfig"
 )
 
 // Mock profiles are based on https://github.com/hyperledger/fabric/blob/v2.0.0-alpha/sampleconfig/configtx.yaml

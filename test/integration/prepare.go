@@ -12,6 +12,7 @@ import (
 	"time"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/channel"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/resmgmt"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
@@ -26,7 +27,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/third_party/github.com/hyperledger/fabric/common/policydsl"
-	"github.com/pkg/errors"
 )
 
 var orgExpectedPeers = map[string]int{

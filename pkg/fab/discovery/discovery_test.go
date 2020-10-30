@@ -15,12 +15,12 @@ import (
 	"time"
 
 	"github.com/hyperledger/fabric-protos-go/discovery"
+	"github.com/stretchr/testify/assert"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/comm"
 	discmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/discovery/mocks"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 )
 

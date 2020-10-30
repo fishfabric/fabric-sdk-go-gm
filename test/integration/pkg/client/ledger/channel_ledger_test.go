@@ -19,13 +19,13 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
 
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/channel"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/ledger"
 	mspclient "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/resmgmt"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/require"
 )
 
 const (

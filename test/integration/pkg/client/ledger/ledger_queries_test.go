@@ -12,6 +12,7 @@ import (
 	"testing"
 
 	"github.com/golang/protobuf/proto"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/ledger"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
@@ -20,7 +21,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
-	"github.com/stretchr/testify/require"
 )
 
 func TestLedgerClientQueries(t *testing.T) {

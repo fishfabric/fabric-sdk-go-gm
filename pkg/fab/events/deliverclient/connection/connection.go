@@ -15,6 +15,7 @@ import (
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/crypto"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/protoutil"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
@@ -23,7 +24,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/comm"
 	clientdisp "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/client/dispatcher"
-	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 )
 

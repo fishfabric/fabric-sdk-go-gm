@@ -11,8 +11,8 @@ import (
 
 	"sync/atomic"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite/bccsp/sw"
 	"github.com/stretchr/testify/assert"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite/bccsp/sw"
 )
 
 const (

@@ -24,8 +24,8 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/cachebridge"
 	sdkp11 "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite/common/pkcs11"
 
-	logging "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/logbridge"
 	"github.com/miekg/pkcs11"
+	logging "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/logbridge"
 )
 
 // Look for an EC key by SKI, stored in CKA_ID

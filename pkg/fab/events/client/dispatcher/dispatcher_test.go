@@ -10,6 +10,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/client/lbp"
 	clientmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/client/mocks"
@@ -19,9 +22,6 @@ import (
 	servicemocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/mocks"
 	fabmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 var (

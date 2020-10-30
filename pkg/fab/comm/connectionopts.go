@@ -11,9 +11,9 @@ import (
 	"crypto/x509"
 	"time"
 
+	"github.com/spf13/cast"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
-	"github.com/spf13/cast"
 	"google.golang.org/grpc/keepalive"
 )
 

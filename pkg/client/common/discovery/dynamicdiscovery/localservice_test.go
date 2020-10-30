@@ -13,6 +13,8 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	contextAPI "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	pfab "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
@@ -20,8 +22,6 @@ import (
 	discmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/discovery/mocks"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 const (

@@ -14,6 +14,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/selection/balancer"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/selection/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/selection/sorter/blockheightsorter"
@@ -23,9 +26,6 @@ import (
 	discmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/discovery/mocks"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 const (
@@ -269,7 +269,7 @@ func TestSelection(t *testing.T) {
 	t.Run("Fatal Error Access denied on all peers", func(t *testing.T) {
 		discClient.SetResponses(
 			&discovery.MockDiscoverEndpointResponse{
-				AccessDenied: true,
+				AccessDenied:  true,
 				PeerEndpoints: []*discmocks.MockDiscoveryPeerEndpoint{},
 			},
 		)

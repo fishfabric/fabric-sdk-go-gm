@@ -11,10 +11,10 @@ import (
 	"encoding/pem"
 	"testing"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/lib/attrmgr"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/msp"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/lib/attrmgr"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/msp"
 )
 
 // nolint: deadcode

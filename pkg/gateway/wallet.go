@@ -11,10 +11,10 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	pb_msp "github.com/hyperledger/fabric-protos-go/msp"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
-	"github.com/pkg/errors"
 )
 
 type wallet interface {

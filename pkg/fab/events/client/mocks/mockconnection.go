@@ -11,11 +11,11 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/api"
 	servicemocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/mocks"
-	"github.com/pkg/errors"
 )
 
 // Operation is the operation being performed

@@ -11,9 +11,9 @@ import (
 
 	"strings"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/cast"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 )
 
 //New providers lookup wrapper around given backend

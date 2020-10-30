@@ -9,9 +9,9 @@ package dispatcher
 import (
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
-	"github.com/pkg/errors"
 )
 
 type params struct {

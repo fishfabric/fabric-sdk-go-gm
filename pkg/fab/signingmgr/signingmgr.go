@@ -9,8 +9,8 @@ package signingmgr
 import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite"
 	"github.com/pkg/errors"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite"
 )
 
 // SigningManager is used for signing objects with private key

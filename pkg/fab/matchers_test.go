@@ -11,8 +11,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
 	"github.com/stretchr/testify/assert"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
@@ -605,7 +605,7 @@ func testIgnoreEndpointOrdererSearch(t *testing.T, config fab.EndpointConfig) {
 
 	//Test if orderer excluded in orderer search by name
 
-	ordererConfig, ok, ignoreOrderer:= config.OrdererConfig("orderer.exclude.example.com")
+	ordererConfig, ok, ignoreOrderer := config.OrdererConfig("orderer.exclude.example.com")
 	assert.False(t, ok)
 	assert.True(t, ignoreOrderer, "orderer must be excluded")
 	assert.Nil(t, ordererConfig)

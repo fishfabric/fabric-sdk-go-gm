@@ -11,6 +11,7 @@ package provider
 import (
 	"testing"
 
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/discovery/dynamicdiscovery"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
@@ -19,7 +20,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/factory/defsvc"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/provider/chpvdr"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
-	"github.com/stretchr/testify/require"
 )
 
 func TestDynamicDiscovery(t *testing.T) {

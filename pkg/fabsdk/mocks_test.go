@@ -12,6 +12,7 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/logging/api"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/logging/modlog"
@@ -20,7 +21,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/factory/defcore"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/factory/defmsp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/factory/defsvc"
-	"github.com/pkg/errors"
 )
 
 type mockCorePkg struct {

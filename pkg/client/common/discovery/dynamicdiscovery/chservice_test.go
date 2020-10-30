@@ -9,11 +9,13 @@ SPDX-License-Identifier: Apache-2.0
 package dynamicdiscovery
 
 import (
-	fabDiscovery "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/discovery"
 	"github.com/pkg/errors"
+	fabDiscovery "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/discovery"
 	"testing"
 	"time"
 
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/discovery"
 	contextAPI "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
@@ -21,8 +23,6 @@ import (
 	discmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/discovery/mocks"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 func TestDiscoveryService(t *testing.T) {

@@ -12,10 +12,10 @@ import (
 	"time"
 
 	"github.com/hyperledger/fabric-protos-go/common"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
-	"github.com/pkg/errors"
 )
 
 const loggerModule = "fabsdk/client"

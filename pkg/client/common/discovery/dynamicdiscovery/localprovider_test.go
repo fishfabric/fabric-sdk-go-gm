@@ -12,13 +12,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/discovery"
+	"github.com/stretchr/testify/assert"
 	contextAPI "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	pfab "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/discovery"
 	discmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/discovery/mocks"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	"github.com/stretchr/testify/assert"
 )
 
 const (

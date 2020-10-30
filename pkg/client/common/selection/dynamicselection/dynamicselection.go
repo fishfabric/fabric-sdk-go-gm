@@ -12,10 +12,10 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazycache"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazyref"
 
+	"github.com/pkg/errors"
 	copts "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
-	"github.com/pkg/errors"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/selection/dynamicselection/pgresolver"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/selection/options"

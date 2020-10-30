@@ -13,6 +13,7 @@ import (
 	"reflect"
 
 	"github.com/golang/mock/gomock"
+	"github.com/stretchr/testify/assert"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/test/mockmsp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config"
@@ -22,7 +23,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/factory/defcore"
 	mspimpl "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestCreateUserStore(t *testing.T) {

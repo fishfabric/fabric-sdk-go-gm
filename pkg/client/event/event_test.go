@@ -10,6 +10,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 	txnmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/mocks"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
@@ -17,14 +19,12 @@ import (
 	contextImpl "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/context"
 	fcmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
 	mspmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/test/mockmsp"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/assert"
 
+	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/deliverclient/seek"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/dispatcher"
 	servicemocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/mocks"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
 )
 
 var (

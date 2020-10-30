@@ -10,12 +10,12 @@ import (
 	"runtime/debug"
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/blockfilter"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/dispatcher"
-	"github.com/pkg/errors"
 )
 
 const (

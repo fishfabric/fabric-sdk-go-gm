@@ -12,13 +12,13 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	mspctx "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/require"
 )
 
 const (

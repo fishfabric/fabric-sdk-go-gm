@@ -7,12 +7,12 @@ SPDX-License-Identifier: Apache-2.0
 package invoke
 
 import (
+	"github.com/pkg/errors"
 	selectopts "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/selection/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/peer"
-	"github.com/pkg/errors"
 
 	"github.com/golang/protobuf/proto"
 	pb "github.com/hyperledger/fabric-protos-go/peer"

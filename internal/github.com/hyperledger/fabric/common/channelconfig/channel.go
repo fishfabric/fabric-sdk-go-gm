@@ -15,12 +15,12 @@ import (
 	"math"
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/capabilities"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/util"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
-	"github.com/pkg/errors"
 )
 
 // Channel config keys

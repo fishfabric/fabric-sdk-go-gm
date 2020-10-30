@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"testing"
 
-	pfab "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/stretchr/testify/assert"
+	pfab "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 )
 
 func TestPickRandomNPeerConfigs(t *testing.T) {

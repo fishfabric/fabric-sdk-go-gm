@@ -9,11 +9,11 @@ package mocks
 import (
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	contextImpl "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/txn"
-	"github.com/pkg/errors"
 )
 
 // MockTransactor provides an implementation of Transactor that exposes all its context.

@@ -13,9 +13,9 @@ import (
 
 	commtls "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/comm/tls"
 
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 	logApi "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/logging/api"
-	"github.com/stretchr/testify/require"
 )
 
 var (

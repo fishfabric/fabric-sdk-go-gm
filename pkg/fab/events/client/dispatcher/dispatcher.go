@@ -10,6 +10,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
@@ -17,7 +18,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/api"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/client/peerresolver"
 	esdispatcher "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/dispatcher"
-	"github.com/pkg/errors"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")

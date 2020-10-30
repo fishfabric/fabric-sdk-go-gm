@@ -14,6 +14,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/pkg/errors"
 	fabricCaUtil "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/util"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	providersFab "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
@@ -23,7 +24,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite/bccsp/sw"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab"
 	fcmocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
-	"github.com/pkg/errors"
 )
 
 var (

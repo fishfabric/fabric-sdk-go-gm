@@ -10,10 +10,10 @@ Please review third_party pinning scripts and patches for more details.
 package pkcs11
 
 import (
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/pkcs11"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/sw"
-	"github.com/pkg/errors"
 )
 
 const (

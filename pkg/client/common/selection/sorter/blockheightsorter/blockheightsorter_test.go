@@ -12,11 +12,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/selection/balancer"
 	fab "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	emocks "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/client/mocks"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/mocks"
-	"github.com/stretchr/testify/assert"
 )
 
 const (

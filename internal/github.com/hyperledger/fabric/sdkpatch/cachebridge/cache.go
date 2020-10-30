@@ -16,9 +16,9 @@ import (
 
 	"encoding/hex"
 
+	"github.com/miekg/pkcs11"
 	flogging "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/sdkpatch/logbridge"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/concurrent/lazycache"
-	"github.com/miekg/pkcs11"
 )
 
 var logger = flogging.MustGetLogger("bccsp_p11_sessioncache")

@@ -13,6 +13,8 @@ import (
 	"testing"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/require"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/channel"
 	mspclient "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/resmgmt"
@@ -28,8 +30,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/test"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/metadata"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/third_party/github.com/hyperledger/fabric/common/policydsl"
-	"github.com/pkg/errors"
-	"github.com/stretchr/testify/require"
 )
 
 // BaseSetupImpl implementation of BaseTestSetup

@@ -11,10 +11,10 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/spf13/cast"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/lookup"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/pathvar"
-	"github.com/spf13/cast"
 )
 
 const (

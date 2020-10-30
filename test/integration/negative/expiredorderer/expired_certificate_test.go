@@ -17,13 +17,13 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk"
 	"google.golang.org/grpc/grpclog"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/lookup"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/mocks"
 	fabImpl "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/test/integration"
-	"github.com/stretchr/testify/assert"
 )
 
 const (

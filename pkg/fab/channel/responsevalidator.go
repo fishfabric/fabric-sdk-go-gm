@@ -8,9 +8,9 @@ package channel
 
 import (
 	"github.com/golang/protobuf/proto"
+	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
-	"github.com/pkg/errors"
 )
 
 // TransactionProposalResponseVerifier struct is for verifying TransactionProposalResponse and matches config blocks
