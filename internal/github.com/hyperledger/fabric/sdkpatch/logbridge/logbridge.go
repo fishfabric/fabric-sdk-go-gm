@@ -14,7 +14,7 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 )
 
-// Log levels (from fabric-sdk-go/pkg/logging/level.go).
+// Log levels (from fabric-sdk-go-gm/pkg/logging/level.go).
 const (
 	CRITICAL logging.Level = iota
 	ERROR

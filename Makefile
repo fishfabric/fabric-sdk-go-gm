@@ -113,7 +113,7 @@ CC_MODE_LIFECYCLE = lifecycle
 CC_MODE_LSCC = lscc
 
 # Local variables used by makefile
-PROJECT_NAME           := fabric-sdk-go
+PROJECT_NAME           := fabric-sdk-go-gm
 ARCH                   := $(shell uname -m)
 OS_NAME                := $(shell uname -s)
 FIXTURE_PROJECT_NAME   := fabsdkgo
@@ -511,12 +511,12 @@ dockerenv-latest-up: clean-tests populate-fixtures-devstable-noforce
 
 .PHONY: mock-gen
 mock-gen:
-	$(MOCKGEN_CMD) -build_flags '$(GO_LDFLAGS_ARG)' -package mockcore github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core CryptoSuiteConfig,ConfigBackend,Providers | sed "s/github.com\/hyperledger\/fabric-sdk-go\/vendor\///g" | goimports > pkg/common/providers/test/mockcore/mockcore.gen.go
-	$(MOCKGEN_CMD) -build_flags '$(GO_LDFLAGS_ARG)' -package mockmsp github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp IdentityConfig,IdentityManager,Providers | sed "s/github.com\/hyperledger\/fabric-sdk-go\/vendor\///g" | goimports > pkg/common/providers/test/mockmsp/mockmsp.gen.go
-	$(MOCKGEN_CMD) -build_flags '$(GO_LDFLAGS_ARG)' -package mockfab github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab EndpointConfig,ProposalProcessor,Providers | sed "s/github.com\/hyperledger\/fabric-sdk-go\/vendor\///g" | goimports > pkg/common/providers/test/mockfab/mockfab.gen.go
-	$(MOCKGEN_CMD) -build_flags '$(GO_LDFLAGS_ARG)' -package mockcontext github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context Providers,Client | sed "s/github.com\/hyperledger\/fabric-sdk-go\/vendor\///g" | goimports > pkg/common/providers/test/mockcontext/mockcontext.gen.go
-	$(MOCKGEN_CMD) -build_flags '$(GO_LDFLAGS_ARG)' -package mocksdkapi github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/api CoreProviderFactory,MSPProviderFactory,ServiceProviderFactory | sed "s/github.com\/hyperledger\/fabric-sdk-go\/vendor\///g" | goimports > pkg/fabsdk/test/mocksdkapi/mocksdkapi.gen.go
-	$(MOCKGEN_CMD) -build_flags '$(GO_LDFLAGS_ARG)' -package mockmspapi github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/api CAClient | sed "s/github.com\/hyperledger\/fabric-sdk-go\/vendor\///g" | goimports > pkg/msp/test/mockmspapi/mockmspapi.gen.go
+	$(MOCKGEN_CMD) -build_flags '$(GO_LDFLAGS_ARG)' -package mockcore github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core CryptoSuiteConfig,ConfigBackend,Providers | sed "s/github.com\/hyperledger\/fabric-sdk-go-gm\/vendor\///g" | goimports > pkg/common/providers/test/mockcore/mockcore.gen.go
+	$(MOCKGEN_CMD) -build_flags '$(GO_LDFLAGS_ARG)' -package mockmsp github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp IdentityConfig,IdentityManager,Providers | sed "s/github.com\/hyperledger\/fabric-sdk-go-gm\/vendor\///g" | goimports > pkg/common/providers/test/mockmsp/mockmsp.gen.go
+	$(MOCKGEN_CMD) -build_flags '$(GO_LDFLAGS_ARG)' -package mockfab github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab EndpointConfig,ProposalProcessor,Providers | sed "s/github.com\/hyperledger\/fabric-sdk-go-gm\/vendor\///g" | goimports > pkg/common/providers/test/mockfab/mockfab.gen.go
+	$(MOCKGEN_CMD) -build_flags '$(GO_LDFLAGS_ARG)' -package mockcontext github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context Providers,Client | sed "s/github.com\/hyperledger\/fabric-sdk-go-gm\/vendor\///g" | goimports > pkg/common/providers/test/mockcontext/mockcontext.gen.go
+	$(MOCKGEN_CMD) -build_flags '$(GO_LDFLAGS_ARG)' -package mocksdkapi github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fabsdk/api CoreProviderFactory,MSPProviderFactory,ServiceProviderFactory | sed "s/github.com\/hyperledger\/fabric-sdk-go-gm\/vendor\///g" | goimports > pkg/fabsdk/test/mocksdkapi/mocksdkapi.gen.go
+	$(MOCKGEN_CMD) -build_flags '$(GO_LDFLAGS_ARG)' -package mockmspapi github.com/tw-bc-group/fabric-sdk-go-gm/pkg/msp/api CAClient | sed "s/github.com\/hyperledger\/fabric-sdk-go-gm\/vendor\///g" | goimports > pkg/msp/test/mockmspapi/mockmspapi.gen.go
 
 .PHONY: crypto-gen
 crypto-gen:
@@ -645,9 +645,9 @@ clean-populate:
 .PHONY: clean-cache
 clean-cache:
 ifeq ($(OS_NAME),Darwin)
-	rm -Rf ${HOME}/Library/Caches/fabric-sdk-go
+	rm -Rf ${HOME}/Library/Caches/fabric-sdk-go-gm
 else
-	rm -Rf ${HOME}/.cache/fabric-sdk-go
+	rm -Rf ${HOME}/.cache/fabric-sdk-go-gm
 endif
 
 .PHONY: clean-depend-images

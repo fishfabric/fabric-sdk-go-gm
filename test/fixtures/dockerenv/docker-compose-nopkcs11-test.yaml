@@ -25,8 +25,8 @@ services:
       - CC_MODE
     volumes:
       - ${GOPATH}/pkg/mod:/opt/gopath/pkg/mod
-      - ../../../:/opt/workspace/fabric-sdk-go
-    command: /opt/workspace/fabric-sdk-go/test/scripts/integration.sh
+      - ../../../:/opt/workspace/fabric-sdk-go-gm
+    command: /opt/workspace/fabric-sdk-go-gm/test/scripts/integration.sh
     depends_on:
       - org1ca1
       - org2ca1

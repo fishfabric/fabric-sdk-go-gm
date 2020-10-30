@@ -4,7 +4,7 @@ Copyright SecureKey Technologies Inc. All Rights Reserved.
 SPDX-License-Identifier: Apache-2.0
 */
 
-// Package status defines metadata for errors returned by fabric-sdk-go. This
+// Package status defines metadata for errors returned by fabric-sdk-go-gm. This
 // information may be used by SDK users to make decisions about how to handle
 // certain error conditions.
 // Status codes are divided by group, where each group represents a particular
@@ -23,7 +23,7 @@ import (
 )
 
 // Status provides additional information about an unsuccessful operation
-// performed by fabric-sdk-go. Essentially, this object contains metadata about
+// performed by fabric-sdk-go-gm. Essentially, this object contains metadata about
 // an error returned by the SDK.
 type Status struct {
 	// Group status group
@@ -44,7 +44,7 @@ const (
 	UnknownStatus Group = iota
 
 	// TransportStatus defines the status returned by the transport layer of
-	// the connections made by fabric-sdk-go
+	// the connections made by fabric-sdk-go-gm
 
 	// GRPCTransportStatus is the status associated with requests made over
 	// gRPC connections
@@ -53,7 +53,7 @@ const (
 	// connections
 	HTTPTransportStatus
 
-	// ServerStatus defines the status returned by various servers that fabric-sdk-go
+	// ServerStatus defines the status returned by various servers that fabric-sdk-go-gm
 	// is a client to
 
 	// EndorserServerStatus status returned by the endorser server
@@ -65,7 +65,7 @@ const (
 	// FabricCAServerStatus status returned by the Fabric CA server
 	FabricCAServerStatus
 
-	// ClientStatus defines the status from responses inferred by fabric-sdk-go.
+	// ClientStatus defines the status from responses inferred by fabric-sdk-go-gm.
 	// This could be a result of response validation performed by the SDK - for example,
 	// a client status could be produced by validating endorsements
 

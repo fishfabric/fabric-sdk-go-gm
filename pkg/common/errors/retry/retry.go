@@ -4,7 +4,7 @@ Copyright SecureKey Technologies Inc. All Rights Reserved.
 SPDX-License-Identifier: Apache-2.0
 */
 
-// Package retry provides retransmission capabilities to fabric-sdk-go.
+// Package retry provides retransmission capabilities to fabric-sdk-go-gm.
 // The only user interaction with this package is expected to be with the
 // defaults defined below.
 // They can be used in conjunction with the WithRetry setting offered by certain
@@ -32,7 +32,7 @@ type Opts struct {
 	// For example, a backoff factor of 2.5 will result in a backoff of
 	// InitialBackoff * 2.5 * 2.5 on the second attempt.
 	BackoffFactor float64
-	// RetryableCodes defines the status codes, mapped by group, returned by fabric-sdk-go
+	// RetryableCodes defines the status codes, mapped by group, returned by fabric-sdk-go-gm
 	// that warrant a retry. This will default to retry.DefaultRetryableCodes.
 	RetryableCodes map[status.Group][]status.Code
 }

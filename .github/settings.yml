@@ -1,5 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
 repository:
-  name: fabric-sdk-go
+  name: fabric-sdk-go-gm
   description: null
   homepage: https://wiki.hyperledger.org/display/fabric
   default_branch: master

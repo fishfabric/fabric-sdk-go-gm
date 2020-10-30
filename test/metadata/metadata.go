@@ -19,7 +19,7 @@ var SDKConfigPath = "test/fixtures/config"
 // Project is the Go project name relative to the Go Path
 var Project = "github.com/tw-bc-group/fabric-sdk-go-gm"
 
-// ProjectPath is the path to the source of fabric-sdk-go
+// ProjectPath is the path to the source of fabric-sdk-go-gm
 var ProjectPath = ""
 
 // TestRunID is an identifier for the current run of tests

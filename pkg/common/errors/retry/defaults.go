@@ -94,7 +94,7 @@ var DefaultRetryableCodes = map[status.Group][]status.Code{
 }
 
 // ResMgmtDefaultRetryableCodes are the suggested codes that should be treated as
-// transient by fabric-sdk-go/pkg/client/resmgmt.Client
+// transient by fabric-sdk-go-gm/pkg/client/resmgmt.Client
 var ResMgmtDefaultRetryableCodes = map[status.Group][]status.Code{
 	status.EndorserClientStatus: {
 		status.EndorsementMismatch,
@@ -124,7 +124,7 @@ var ResMgmtDefaultRetryableCodes = map[status.Group][]status.Code{
 }
 
 // ChannelClientRetryableCodes are the suggested codes that should be treated as
-// transient by fabric-sdk-go/pkg/client/channel.Client
+// transient by fabric-sdk-go-gm/pkg/client/channel.Client
 var ChannelClientRetryableCodes = map[status.Group][]status.Code{
 	status.EndorserClientStatus: {
 		status.ConnectionFailed, status.EndorsementMismatch,

@@ -16,7 +16,7 @@ import (
 
 var projectPathOnce sync.Once
 
-// GetProjectPath returns the path to the source of fabric-sdk-go. More specifically, this function searches for the
+// GetProjectPath returns the path to the source of fabric-sdk-go-gm. More specifically, this function searches for the
 // directory containing the project's go.mod file. This function must only be called from tests.
 func GetProjectPath() string {
 	projectPathOnce.Do(func() {

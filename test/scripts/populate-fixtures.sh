@@ -21,7 +21,7 @@ DATE=$(date +"%m-%d-%Y")
 CACHE_PATH=""
 function setCachePath {
     declare envOS=$(uname -s)
-    declare pkgDir="fabric-sdk-go"
+    declare pkgDir="fabric-sdk-go-gm"
 
     if [ ${envOS} = 'Darwin' ]; then
         CACHE_PATH="${HOME}/Library/Caches/${pkgDir}"

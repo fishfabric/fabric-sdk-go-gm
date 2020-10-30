@@ -89,7 +89,7 @@ func (c Code) String() string {
 	return strconv.Itoa(int(c))
 }
 
-// ToSDKStatusCode cast to fabric-sdk-go status code
+// ToSDKStatusCode cast to fabric-sdk-go-gm status code
 func ToSDKStatusCode(c int32) Code {
 	return Code(c)
 }
