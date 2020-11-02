@@ -677,3 +677,9 @@ clean-tests-temp:
 
 .PHONY: clean-tests
 clean-tests: clean-tests-temp clean-tests-build
+
+.PHONY: env env-%
+env-%:
+	@echo $*=$($*)
+
+env: $(patsubst %, env-%, $(shell cat Makefile | grep -e '\w*[ ?]=' | awk '{print $$1}'))
