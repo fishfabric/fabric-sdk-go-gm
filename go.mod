@@ -15,6 +15,10 @@ require (
 	github.com/hyperledger/fabric-config v0.0.5
 	github.com/hyperledger/fabric-lib-go v1.0.0
 	github.com/hyperledger/fabric-protos-go v0.0.0-20200707132912-fee30f3ccd23
+	github.com/tw-bc-group/fabric-gm v0.0.0-00010101000000-000000000000
+	github.com/tw-bc-group/fabric-ca-gm v0.0.0-00010101000000-000000000000
+	github.com/pkg/errors v0.8.1
+	github.com/stretchr/testify v1.5.1
 	github.com/magiconair/properties v1.8.1 // indirect
 	github.com/miekg/pkcs11 v1.0.3
 	github.com/mitchellh/mapstructure v1.3.2
@@ -31,6 +35,13 @@ require (
 	golang.org/x/net v0.0.0-20190613194153-d28f0bde5980
 	google.golang.org/grpc v1.29.1
 	gopkg.in/yaml.v2 v2.3.0
+)
+
+// Require have a local copy of fabric-gm and fabric-ca-gm under the same directory
+// TODO-gm: Remove this after finishing the intigration.
+replace (
+	github.com/tw-bc-group/fabric-ca-gm => ../fabric-ca-gm
+	github.com/tw-bc-group/fabric-gm => ../fabric-gm
 )
 
 go 1.14
