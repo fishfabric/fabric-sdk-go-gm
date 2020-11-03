@@ -13,7 +13,7 @@ services:
       - FABRIC_CA_SERVER_CA_NAME=ca.org1.example.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=${ORG1CA1_FABRIC_CA_SERVER_CA_KEYFILE}
-      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_ENABLED=${TEST_TLS_ENABLED:-true}
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/tls/peer/server.crt
       - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/tls/peer/server.key
       - FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE
@@ -47,7 +47,7 @@ services:
       - FABRIC_CA_SERVER_CA_NAME=tlsca.org1.example.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=${ORG1TLSCA_FABRIC_CA_SERVER_CA_KEYFILE}
-      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_ENABLED=${TEST_TLS_ENABLED:-true}
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/tls/peer/server.crt
       - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/tls/peer/server.key
       - FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE
@@ -76,7 +76,7 @@ services:
       - FABRIC_CA_SERVER_CA_NAME=ca.org2.example.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org2.example.com-cert.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=${ORG2CA1_FABRIC_CA_SERVER_CA_KEYFILE}
-      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_ENABLED=${TEST_TLS_ENABLED:-true}
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/tls/peer/server.crt
       - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/tls/peer/server.key
       - FABRIC_CA_SERVER_TLS_CLIENTAUTH_TYPE
@@ -107,7 +107,7 @@ services:
       - ORDERER_GENERAL_BOOTSTRAPFILE=/etc/hyperledger/configtx/twoorgs.genesis.block
       - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
       - ORDERER_GENERAL_LOCALMSPDIR=/etc/hyperledger/msp/orderer
-      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_ENABLED=${TEST_TLS_ENABLED:-true}
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/etc/hyperledger/tls/orderer/server.key
       - ORDERER_GENERAL_TLS_CERTIFICATE=/etc/hyperledger/tls/orderer/server.crt
       - ORDERER_GENERAL_TLS_ROOTCAS=[/etc/hyperledger/tls/orderer/ca.crt]
@@ -153,7 +153,7 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.example.com:7051
       - CORE_PEER_GOSSIP_USELEADERELECTION=false
       - CORE_PEER_GOSSIP_ORGLEADER=true
-      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_ENABLED=${TEST_TLS_ENABLED:-true}
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/tls/peer/server.key
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/tls/peer/server.crt
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/tls/peer/ca.crt
@@ -209,7 +209,7 @@ services:
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051
       - CORE_PEER_GOSSIP_USELEADERELECTION=false
       - CORE_PEER_GOSSIP_ORGLEADER=false
-      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_ENABLED=${TEST_TLS_ENABLED:-true}
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/tls/peer/server.key
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/tls/peer/server.crt
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/tls/peer/ca.crt
@@ -265,7 +265,7 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.example.com:8051
       - CORE_PEER_GOSSIP_BOOTSTRAP=127.0.0.1:8051
       #- CORE_PEER_GOSSIP_BOOTSTRAP=peer1.org2.example.com:9051
-      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_ENABLED=${TEST_TLS_ENABLED:-true}
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/tls/peer/server.key
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/tls/peer/server.crt
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/tls/peer/ca.crt
@@ -320,7 +320,7 @@ services:
       - CORE_PEER_ADDRESS=peer1.org2.example.com:9051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org2.example.com:9051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org2.example.com:8051
-      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_ENABLED=${TEST_TLS_ENABLED:-true}
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/tls/peer/server.key
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/tls/peer/server.crt
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/tls/peer/ca.crt
