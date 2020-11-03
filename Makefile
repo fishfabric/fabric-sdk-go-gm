@@ -79,10 +79,10 @@ FIXTURE_DOCKER_REMOVE_FORCE ?= false
 FABRIC_SDK_DEPRECATED_UNITTEST ?= false
 
 # Code levels to exercise integration/e2e tests against (overridable)
-FABRIC_STABLE_INTTEST          ?= true
+FABRIC_STABLE_INTTEST          ?= false
 FABRIC_STABLE_PKCS11_INTTEST   ?= false
 FABRIC_STABLE_NEGATIVE_INTTEST ?= false
-FABRIC_PREV_INTTEST            ?= false
+FABRIC_PREV_INTTEST            ?= true
 FABRIC_PRERELEASE_INTTEST      ?= false
 FABRIC_DEVSTABLE_INTTEST       ?= false
 FABRIC_STABLE_LOCAL_INTTEST    ?= false
@@ -325,6 +325,7 @@ integration-tests-stable: clean-tests depend-noforce populate-noforce
 		$(DOCKER_COMPOSE_CMD) $(BASE_DOCKER_COMPOSE_FILES) -f docker-compose-nopkcs11-test.yaml up $(DOCKER_COMPOSE_UP_TEST_FLAGS)
 	@cd $(FIXTURE_DOCKERENV_PATH) && FABRIC_DOCKER_REGISTRY=$(FABRIC_RELEASE_REGISTRY) $(FIXTURE_SCRIPTS_PATH)/check_status.sh "$(BASE_DOCKER_COMPOSE_FILES) -f ./docker-compose-nopkcs11-test.yaml"
 
+# TODO-gm: Replace with gm docker images
 .PHONY: integration-tests-prev
 integration-tests-prev: clean-tests depend-noforce populate-fixtures-prev-noforce
 	@. $(FIXTURE_DOCKERENV_PATH)/prev-env.sh && \
@@ -358,7 +359,7 @@ integration-tests-devstable: clean-tests depend-noforce populate-noforce populat
 		FABRIC_FIXTURE_VERSION=v$(FABRIC_DEVSTABLE_VERSION_MINOR) FABRIC_CRYPTOCONFIG_VERSION=$(FABRIC_CRYPTOCONFIG_VER) \
 		GO_TESTFLAGS="$(GO_TESTFLAGS_INTEGRATION)" \
 		$(DOCKER_COMPOSE_CMD) $(BASE_DOCKER_COMPOSE_FILES) -f docker-compose-nopkcs11-test.yaml up $(DOCKER_COMPOSE_UP_TEST_FLAGS)
-	@cd $(FIXTURE_DOCKERENV_PATH) && FABRIC_DOCKER_REGISTRY=$(FABRIC_DEV_REGISTRY) $(FIXTURE_SCRIPTS_PATH)/check_status.sh "$(BASE_DOCKER_COMPOSE_FILES) -f ./docker-compose-nopkcs11-test.yaml"
+	@cd $(FIXTURE_DOCKERENV_PATH) && FABRIC_DOCKER_REGISTRY=$(FABRIC_DEV_REGISTRY) $(FIXTURE_SCRIPTS_PATH)/check_status.sh "$(BASE_DOCKER_COMPOSE_FILES) -f ./docker-compose-nopkcs11-test-gm.yaml"
 
 .PHONY: integration-tests-stable-negative
 integration-tests-stable-negative: clean-tests depend-noforce populate-noforce
@@ -465,6 +466,7 @@ integration-tests-devstable-local: clean-tests-temp depend-noforce populate-nofo
 	FABRIC_FIXTURE_VERSION=v$(FABRIC_DEVSTABLE_VERSION_MINOR) FABRIC_CRYPTOCONFIG_VERSION=$(FABRIC_CRYPTOCONFIG_VER) FABRIC_SDKGO_CODELEVEL_VER=$(FABRIC_DEVSTABLE_CODELEVEL_VER) FABRIC_SDKGO_CODELEVEL_TAG=$(FABRIC_DEVSTABLE_CODELEVEL_TAG) TEST_LOCAL=true  $(TEST_SCRIPTS_PATH)/integration.sh
 	@cd $(FIXTURE_DOCKERENV_PATH) && $(DOCKER_COMPOSE_CMD) $(BASE_DOCKER_COMPOSE_FILES) down
 
+# TODO-gm: Replace with GM images
 .PHONY: dockerenv-prev-up
 dockerenv-prev-up: clean-tests populate-fixtures-prev-noforce
 	@. $(FIXTURE_DOCKERENV_PATH)/prev-env.sh && \

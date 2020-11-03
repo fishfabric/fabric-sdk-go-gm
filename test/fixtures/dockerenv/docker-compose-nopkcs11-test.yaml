@@ -26,6 +26,11 @@ services:
     volumes:
       - ${GOPATH}/pkg/mod:/opt/gopath/pkg/mod
       - ../../../:/opt/workspace/fabric-sdk-go-gm
+      # For local integration with CA & CORE
+      # TODO-gm: Remove this after integration
+      - ../../../../fabric-gm:/opt/workspace/fabric-gm
+      - ../../../../fabric-ca-gm:/opt/workspace/fabric-ca-gm
+      # End
     command: /opt/workspace/fabric-sdk-go-gm/test/scripts/integration.sh
     depends_on:
       - org1ca1
