@@ -1,28 +1,20 @@
-# Hyperledger Fabric Client SDK for Go
+# Hyperledger Fabric 国密(GM) Client SDK for Go
 
-[![Release](https://img.shields.io/github/release/hyperledger/fabric-sdk-go.svg?style=flat-square)](https://github.com/hyperledger/fabric-sdk-go/releases/latest)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://raw.githubusercontent.com/hyperledger/fabric-sdk-go/master/LICENSE)
-[![GoDoc](https://godoc.org/github.com/hyperledger/fabric-sdk-go?status.svg)](https://godoc.org/github.com/hyperledger/fabric-sdk-go)
-
-[![Build Status](https://dev.azure.com/hyperledger/fabric-sdk-go/_apis/build/status/hyperledger.fabric-sdk-go?branchName=master)](https://dev.azure.com/hyperledger/fabric-sdk-go/_build/latest?definitionId=19&branchName=master)
-[![codecov](https://codecov.io/gh/hyperledger/fabric-sdk-go/branch/master/graph/badge.svg)](https://codecov.io/gh/hyperledger/fabric-sdk-go)
-[![Go Report Card](https://goreportcard.com/badge/github.com/hyperledger/fabric-sdk-go)](https://goreportcard.com/report/github.com/hyperledger/fabric-sdk-go)
-
-This SDK enables Go developers to build solutions that interact with [Hyperledger Fabric](http://hyperledger-fabric.readthedocs.io/en/latest/).
+This SDK enables Go developers to build solutions that interact with [Hyperledger Fabric 国密(GM)](https://github.com/tw-bc-group/fabric-gm)
 
 ## Getting started
 
 Obtain the client SDK packages for Fabric and Fabric CA.
 
 ```bash
-go get github.com/hyperledger/fabric-sdk-go
+go get github.com/hyperledger/fabric-sdk-go-gm
 ```
 
 You're good to go, happy coding! Check out the examples for usage demonstrations.
 
 ### Documentation
 
-SDK documentation can be viewed at [GoDoc](https://godoc.org/github.com/hyperledger/fabric-sdk-go).
+SDK documentation can be viewed at [GoDoc](https://godoc.org/github.com/hyperledger/fabric-sdk-go-gm).
 
 The packages intended for end developer usage are within the pkg/client folder along with the main SDK package (pkg/fabsdk).
 
@@ -30,48 +22,38 @@ If you wish to use the Fabric 'Gateway' programming model, then the API is in th
 
 ### Examples
 
+- [Fabcar](https://github.com/tw-bc-group/fabric-samples/tree/v1.4.7-gm-notls/fabcar/go)
 - [E2E Test](test/integration/e2e/end_to_end.go): Basic example that uses SDK to query and execute transaction
 - [Ledger Query Test](test/integration/pkg/client/ledger/ledger_queries_test.go): Basic example that uses SDK to query a channel's underlying ledger
 - [Multi Org Test](test/integration/e2e/orgs/multiple_orgs_test.go): An example that has multiple organisations involved in transaction
 - [Dynamic Endorser Selection](test/integration/pkg/fabsdk/provider/sdk_provider_test.go): An example that uses dynamic endorser selection (based on chaincode policy)
+<!--
 - [E2E PKCS11 Test](test/integration/e2e/pkcs11/e2e_test.go): E2E Test using a PKCS11 crypto suite and configuration
 - [CLI](https://github.com/securekey/fabric-examples/tree/master/fabric-cli/): An example CLI for Fabric built with the Go SDK.
 - More examples needed!
-
-### Community
-
-- Discussion is happening in [Rocket Chat](https://chat.hyperledger.org/channel/fabric-sdk-go).
-- Issue tracking is handled in [Jira](https://jira.hyperledger.org/secure/RapidBoard.jspa?projectKey=FAB&rapidView=7&view=planning).
+-->
 
 ## Client SDK
 
 ### Current Compatibility
 The SDK's integration tests run against three tagged Fabric versions:
-- prev (currently v1.4.7)
-- stable (currently v2.2.0)
+- prev (currently v1.4.7, working on GM)
+- stable (currently v2.2.0, not support GM)
 - prerelease (currently disabled)
 
 Additionally for development purposes integration tests also run against the devstable Fabric version as needed.
-
-### Retired versions
-When the 'prev' code level is updated, the last tested fabric-sdk-go commit or tag is listed below.
-
-- fabric v1.3: ac70276
-- fabric v1.2: 5e291d3
-- fabric v1.1: f7ae259
-- fabric v1.0: 5ac5226
 
 ### Running the test suite
 
 Obtain the client SDK packages for Fabric and Fabric CA.
 
 ```bash
-git clone https://github.com/hyperledger/fabric-sdk-go.git
+git clone https://github.com/tw-bc-group/fabric-sdk-go-gm.git
 ```
 
 ```bash
 # In the Fabric SDK Go directory
-cd fabric-sdk-go/
+cd fabric-sdk-go-gm/
 
 # Optional - Automatically install Go tools used by test suite
 # make depend
@@ -109,7 +91,7 @@ Notes:
 
 ```bash
 # In the Fabric SDK Go directory
-cd fabric-sdk-go/
+cd fabric-sdk-go-gm/
 
 # Optional - Automatically install Go tools used by test suite
 # make depend
@@ -145,10 +127,10 @@ The following commands starts Fabric:
 
 ```bash
 # In the Fabric SDK Go directory
-cd fabric-sdk-go
+cd fabric-sdk-go-gm
 
-# Start fabric (stable tag)
-make dockerenv-stable-up
+# Start fabric (prev tag)
+make dockerenv-prev-up
 
 # Or more generally, start fabric at a different code level (prev, stable, prerelease, devstable)
 # make dockerenv-[CODELEVEL]-up
@@ -160,7 +142,7 @@ Fabric should now be running. In a different shell, run integration tests
 
 ```bash
 # In the Fabric SDK Go directory
-cd fabric-sdk-go
+cd fabric-sdk-go-gm
 
 # Use script to setup parameters for integration tests and execute them
 # Previously we use to have hostnames like Fabric CA server, orderer and peer pointed to localhost
@@ -178,16 +160,17 @@ make integration-tests-local
 # Now since we removed this now, We will be using a different config file config_test_local.yaml
 # which has the Fabric CA server, orderer and peers pointed to localhost
 # It is also possible to run integration tests using go test directly. For example:
-#cd fabric-sdk-go/test/integration/
+#cd fabric-sdk-go-gm/test/integration/
 #go test -args testLocal=true
 
-#cd fabric-sdk-go/test/integration/orgs
+#cd fabric-sdk-go-gm/test/integration/orgs
 #go test -args testLocal=true 
 
 # You should review test/scripts/integration.sh for options and details.
 # Note: you should generally prefer the scripted version to setup parameters for you.
 ```
 
+<!-- NA
 #### Testing with Local Build of Fabric (Advanced)
 
 Alternatively you can use a local build of Fabric using the following commands:
@@ -203,3 +186,4 @@ Hyperledger Fabric SDK Go software is licensed under the [Apache License Version
 
 ---
 This document is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+-->
