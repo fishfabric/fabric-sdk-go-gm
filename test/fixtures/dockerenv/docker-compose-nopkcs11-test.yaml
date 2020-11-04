@@ -30,6 +30,7 @@ services:
       # TODO-gm: Remove this after integration
       - ../../../../fabric-gm:/opt/workspace/fabric-gm
       - ../../../../fabric-ca-gm:/opt/workspace/fabric-ca-gm
+      - ../../../../tjfoc-gm:/opt/workspace/tjfoc-gm
       # End
     command: /opt/workspace/fabric-sdk-go-gm/test/scripts/integration.sh
     depends_on:

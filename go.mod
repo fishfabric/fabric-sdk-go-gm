@@ -5,7 +5,8 @@
 module github.com/tw-bc-group/fabric-sdk-go-gm
 
 require (
-	github.com/Knetic/govaluate v3.0.0+incompatible
+	github.com/Hyperledger-TWGC/tjfoc-gm v1.3.3
+	github.com/Knetic/govaluate v3.0.1-0.20170926212237-aa73cfd04eeb+incompatible
 	github.com/VividCortex/gohistogram v1.0.0 // indirect
 	github.com/cloudflare/cfssl v1.4.1
 	github.com/go-kit/kit v0.8.0
@@ -36,6 +37,8 @@ require (
 	google.golang.org/grpc v1.29.1
 	gopkg.in/yaml.v2 v2.3.0
 )
+
+replace github.com/Hyperledger-TWGC/tjfoc-gm v1.3.3 => ../tjfoc-gm
 
 // Require have a local copy of fabric-gm and fabric-ca-gm under the same directory
 // TODO-gm: Remove this after finishing the intigration.
