@@ -9,6 +9,7 @@ package multisuite
 import (
 	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite/bccsp/gm"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite/bccsp/pkcs11"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite/bccsp/sw"
 )
@@ -16,6 +17,8 @@ import (
 //GetSuiteByConfig returns cryptosuite adaptor for bccsp loaded according to given config
 func GetSuiteByConfig(config core.CryptoSuiteConfig) (core.CryptoSuite, error) {
 	switch config.SecurityProvider() {
+	case "gm":
+		return gm.GetSuiteByConfig(config)
 	case "sw":
 		return sw.GetSuiteByConfig(config)
 	case "pkcs11":
