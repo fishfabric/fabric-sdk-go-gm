@@ -14,7 +14,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/lib/tls"
 	"io/ioutil"
 	"net"
 	"net/http"
@@ -141,16 +140,22 @@ func (c *Client) initHTTPClient(serverName string) error {
 	if c.Config.TLS.Enabled {
 		log.Info("TLS Enabled")
 
-		tlsConfig, err2 := tls.GetClientTLSConfig(&c.Config.TLS, c.csp)
-		if err2 != nil {
-			return fmt.Errorf("Failed to get client TLS config: %s", err2)
-		}
-		// set the default ciphers
-		tlsConfig.CipherSuites = tls.DefaultCipherSuites
-		//set the host name override
-		tlsConfig.ServerName = serverName
+		// TODO-gm: enable tls support
+		s := fmt.Sprintf("TODO-gm: enable tls support, serverName: %s", serverName)
+		log.Warning(s)
 
-		tr.TLSClientConfig = tlsConfig
+		/*
+			tlsConfig, err2 := tls.GetClientTLSConfig(&c.Config.TLS, c.csp)
+			if err2 != nil {
+				return fmt.Errorf("Failed to get client TLS config: %s", err2)
+			}
+			// set the default ciphers
+			tlsConfig.CipherSuites = tls.DefaultCipherSuites
+			//set the host name override
+			tlsConfig.ServerName = serverName
+
+			tr.TLSClientConfig = tlsConfig
+		*/
 	}
 	c.httpClient = &http.Client{Transport: tr}
 	return nil
