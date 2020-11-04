@@ -11,10 +11,10 @@ Please review third_party pinning scripts and patches for more details.
 package lib
 
 import (
-	"crypto/tls"
-	"crypto/x509"
 	"encoding/hex"
 	"encoding/pem"
+	tls "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"net/http"
 
 	"github.com/pkg/errors"

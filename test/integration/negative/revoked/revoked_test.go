@@ -9,9 +9,9 @@ package revoked
 import (
 	"bytes"
 	"crypto/rand"
-	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/pem"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"io"
 	"io/ioutil"
 	"os"

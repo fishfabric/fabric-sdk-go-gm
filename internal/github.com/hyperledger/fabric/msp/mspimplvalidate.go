@@ -12,9 +12,9 @@ package msp
 
 import (
 	"bytes"
-	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"math/big"
 	"reflect"
 	"time"

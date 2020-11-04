@@ -15,11 +15,11 @@ import (
 
 	"strings"
 
-	"crypto/tls"
+	tls "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls"
 
 	"reflect"
 
-	"crypto/x509"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"

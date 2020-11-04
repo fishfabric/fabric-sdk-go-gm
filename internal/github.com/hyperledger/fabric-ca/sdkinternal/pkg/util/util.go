@@ -23,11 +23,11 @@ package util
 import (
 	"bytes"
 	"crypto/ecdsa"
-	"crypto/x509"
 	"encoding/base64"
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"io/ioutil"
 	"math/big"
 	mrand "math/rand"

@@ -8,8 +8,8 @@ package peer
 
 import (
 	reqContext "context"
-	"crypto/x509"
 	"fmt"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"reflect"
 	"testing"
 	"time"

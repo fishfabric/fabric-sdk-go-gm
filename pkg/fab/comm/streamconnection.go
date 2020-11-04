@@ -11,12 +11,12 @@ import (
 
 	"github.com/pkg/errors"
 
+	credentials "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls/gmcredentials"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/verifier"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"
 	fabcontext "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/peer"
 )
 

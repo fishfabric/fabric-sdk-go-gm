@@ -8,7 +8,7 @@ package orderer
 
 import (
 	reqContext "context"
-	"crypto/x509"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"os"
 	"path/filepath"
 	"strings"

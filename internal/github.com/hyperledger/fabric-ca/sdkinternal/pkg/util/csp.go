@@ -23,11 +23,11 @@ package util
 import (
 	"crypto"
 	"crypto/ecdsa"
-	"crypto/tls"
-	"crypto/x509"
 	"encoding/hex"
 	"encoding/pem"
 	"fmt"
+	tls "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"io/ioutil"
 	"strings"
 

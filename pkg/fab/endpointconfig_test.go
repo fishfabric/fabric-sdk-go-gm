@@ -7,10 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package fab
 
 import (
-	"crypto/tls"
-	"crypto/x509"
 	"encoding/pem"
 	"fmt"
+	tls "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"os"
 	"path/filepath"
 	"reflect"

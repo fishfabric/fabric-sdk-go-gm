@@ -12,9 +12,9 @@ package sw
 
 import (
 	"crypto/ecdsa"
-	"crypto/x509"
 	"errors"
 	"fmt"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"reflect"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"

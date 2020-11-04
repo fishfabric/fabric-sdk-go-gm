@@ -13,8 +13,8 @@ package msp
 import (
 	"crypto"
 	"crypto/rand"
-	"crypto/x509"
 	"encoding/hex"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 

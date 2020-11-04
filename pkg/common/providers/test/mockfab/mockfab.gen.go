@@ -6,7 +6,7 @@ package mockfab
 
 import (
 	context "context"
-	tls "crypto/tls"
+	tls "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls"
 	reflect "reflect"
 	time "time"
 

@@ -10,12 +10,13 @@ import (
 	"crypto/ecdsa"
 	"crypto/rand"
 	"crypto/sha256"
-	"crypto/x509"
 	"encoding/pem"
 	"fmt"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"net"
 	"sync"
 
+	credentials "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls/gmcredentials"
 	"github.com/golang/protobuf/proto"
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/discovery"
@@ -31,7 +32,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/third_party/github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 )
 
 // MockEndorserServer mock endorser server to process endorsement proposals

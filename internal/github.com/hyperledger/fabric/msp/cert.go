@@ -23,11 +23,11 @@ package msp
 import (
 	"bytes"
 	"crypto/ecdsa"
-	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
 	"encoding/pem"
 	"fmt"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"math/big"
 	"time"
 

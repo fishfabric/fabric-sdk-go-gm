@@ -11,8 +11,8 @@ Please review third_party pinning scripts and patches for more details.
 package comm
 
 import (
-	"crypto/tls"
-	"crypto/x509"
+	tls "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"time"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/common/metrics"

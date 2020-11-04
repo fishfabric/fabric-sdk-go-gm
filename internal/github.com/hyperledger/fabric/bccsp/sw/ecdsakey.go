@@ -23,9 +23,9 @@ import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/sha256"
-	"crypto/x509"
 	"errors"
 	"fmt"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 )

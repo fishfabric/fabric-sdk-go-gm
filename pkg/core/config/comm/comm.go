@@ -7,9 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 package comm
 
 import (
-	"crypto/tls"
+	tls "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls"
 
-	"crypto/x509"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 
 	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"

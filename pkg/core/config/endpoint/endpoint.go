@@ -7,8 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 package endpoint
 
 import (
-	"crypto/x509"
 	"encoding/pem"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"io/ioutil"
 	"strings"
 

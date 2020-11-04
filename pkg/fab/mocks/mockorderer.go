@@ -12,12 +12,12 @@ import (
 	"net"
 	"sync"
 
+	credentials "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls/gmcredentials"
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/test"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 )
 
 // DeliverySession enables simulation of multiple calls to the orderer

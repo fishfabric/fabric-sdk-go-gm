@@ -11,9 +11,9 @@ import (
 	"os"
 	"testing"
 
+	credentials "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls/gmcredentials"
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"
-	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/testdata"
 
 	"github.com/stretchr/testify/require"

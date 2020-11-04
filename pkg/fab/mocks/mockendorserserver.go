@@ -11,6 +11,7 @@ import (
 	"net"
 	"sync"
 
+	credentials "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls/gmcredentials"
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset/kvrwset"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
@@ -18,7 +19,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/test"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 )
 
 // MockEndorserServer mock endoreser server to process endorsement proposals

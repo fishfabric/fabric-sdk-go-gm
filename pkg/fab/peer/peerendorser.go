@@ -8,14 +8,14 @@ package peer
 
 import (
 	reqContext "context"
-	"crypto/x509"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"regexp"
 	"time"
 
 	"github.com/pkg/errors"
 
+	credentials "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls/gmcredentials"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
 	grpcstatus "google.golang.org/grpc/status"
 

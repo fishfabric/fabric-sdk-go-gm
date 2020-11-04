@@ -7,9 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 package tls
 
 import (
-	"crypto/x509"
 	"encoding/pem"
 	"errors"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"strconv"
 	"testing"
 	"time"

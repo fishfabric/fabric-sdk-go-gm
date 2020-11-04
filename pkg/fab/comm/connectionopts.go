@@ -8,7 +8,7 @@ package comm
 
 import (
 	"context"
-	"crypto/x509"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"time"
 
 	"github.com/spf13/cast"

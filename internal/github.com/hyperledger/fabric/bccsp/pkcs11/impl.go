@@ -12,7 +12,7 @@ package pkcs11
 
 import (
 	"crypto/ecdsa"
-	"crypto/x509"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"os"
 
 	"github.com/pkg/errors"

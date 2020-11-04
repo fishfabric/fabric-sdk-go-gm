@@ -8,7 +8,7 @@ package fab
 
 import (
 	reqContext "context"
-	"crypto/tls"
+	tls "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls"
 	"time"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/options"

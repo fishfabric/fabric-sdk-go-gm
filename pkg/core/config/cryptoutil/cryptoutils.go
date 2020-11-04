@@ -9,9 +9,9 @@ package cryptoutil
 import (
 	"crypto"
 	"crypto/ecdsa"
-	"crypto/tls"
-	"crypto/x509"
 	"encoding/pem"
+	tls "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"io"
 
 	"github.com/pkg/errors"

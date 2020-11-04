@@ -14,11 +14,11 @@ import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
-	"crypto/x509"
 	"encoding/asn1"
 	"encoding/pem"
 	"errors"
 	"fmt"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 )
 
 type pkcs8Info struct {

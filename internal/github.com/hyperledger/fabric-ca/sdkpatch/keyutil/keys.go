@@ -12,10 +12,10 @@ package keyutil
 
 import (
 	"crypto/ecdsa"
-	"crypto/x509"
 	"encoding/pem"
 	"errors"
 	"fmt"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 )
 
 func PrivateKeyToDER(privateKey *ecdsa.PrivateKey) ([]byte, error) {

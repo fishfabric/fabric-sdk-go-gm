@@ -12,6 +12,7 @@ import (
 	"net"
 	"sync"
 
+	credentials "github.com/Hyperledger-TWGC/tjfoc-gm/gmtls/gmcredentials"
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/common"
 	po "github.com/hyperledger/fabric-protos-go/orderer"
@@ -19,7 +20,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/events/service/mocks"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/util/test"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 )
 
 // TestBlock is a test block

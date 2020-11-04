@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package fab
 
 import (
-	"crypto/x509"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"time"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/retry"
