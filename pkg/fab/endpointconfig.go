@@ -15,6 +15,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Hyperledger-TWGC/tjfoc-gm/gmtls"
 	"github.com/mitchellh/mapstructure"
 	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/multi"
@@ -152,6 +153,7 @@ type EndpointConfig struct {
 	channelPeersByChannel    map[string][]fab.ChannelPeer
 	channelOrderersByChannel map[string][]fab.OrdererConfig
 	tlsClientCerts           []tls.Certificate
+	gmtlsClientCerts         []gmtls.Certificate
 	peerMatchers             []matcherEntry
 	ordererMatchers          []matcherEntry
 	channelMatchers          []matcherEntry
@@ -293,6 +295,19 @@ func (c *EndpointConfig) TLSCACertPool() commtls.CertPool {
 // TLSClientCerts loads the client's certs for mutual TLS
 func (c *EndpointConfig) TLSClientCerts() []tls.Certificate {
 	return c.tlsClientCerts
+}
+
+func (c *EndpointConfig) loadGMPrivateKeyFromConfig(clientConfig *ClientConfig, clientCerts gmtls.Certificate, cb []byte) ([]gmtls.Certificate, error) {
+	kb := clientConfig.TLSCerts.Client.Key.Bytes()
+
+	clientCerts, err := gmtls.X509KeyPair(cb, kb)
+	if err != nil {
+		return nil, errors.Errorf("Error loading gm cert/key pair as TLS client credentials: %s", err)
+	}
+
+	logger.Debug("pk read from config successfully")
+
+	return []gmtls.Certificate{clientCerts}, nil
 }
 
 func (c *EndpointConfig) loadPrivateKeyFromConfig(clientConfig *ClientConfig, clientCerts tls.Certificate, cb []byte) ([]tls.Certificate, error) {
@@ -1392,6 +1407,7 @@ func (c *EndpointConfig) loadTLSCertPool() error {
 func (c *EndpointConfig) loadTLSClientCerts(configEntity *endpointConfigEntity) error {
 
 	var clientCerts tls.Certificate
+	var gmClientCerts gmtls.Certificate
 	cb := configEntity.Client.TLSCerts.Client.Cert.Bytes()
 	if len(cb) == 0 {
 		// if no cert found in the config, empty cert chain should be used
@@ -1406,9 +1422,14 @@ func (c *EndpointConfig) loadTLSClientCerts(configEntity *endpointConfigEntity) 
 	// If CryptoSuite fails to load private key from cert then load private key from config
 	if err != nil || pk == nil {
 		logger.Debugf("Reading pk from config, unable to retrieve from cert: %s", err)
-		tlsClientCerts, error := c.loadPrivateKeyFromConfig(&configEntity.Client, clientCerts, cb)
-		if error != nil {
-			return errors.WithMessage(error, "failed to load TLS client certs")
+		tlsClientCerts, err := c.loadPrivateKeyFromConfig(&configEntity.Client, clientCerts, cb)
+		if err != nil {
+			gmtlsClientCerts, err := c.loadGMPrivateKeyFromConfig(&configEntity.Client, gmClientCerts, cb)
+			if err != nil {
+				return errors.WithMessage(err, "failed to load TLS client certs")
+			}
+			c.gmtlsClientCerts = gmtlsClientCerts
+			return nil
 		}
 		c.tlsClientCerts = tlsClientCerts
 		return nil
