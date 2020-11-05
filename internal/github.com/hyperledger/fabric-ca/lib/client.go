@@ -37,6 +37,9 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/api"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/util"
 	log "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/logbridge"
+
+	coreBccsp "github.com/tw-bc-group/fabric-gm/bccsp"
+	gm "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/gm"
 )
 
 // Client is the fabric-ca client object
@@ -205,7 +208,8 @@ func (c *Client) GenCSR(req *api.CSRInfo, id string) ([]byte, core.Key, error) {
 		return nil, nil, err
 	}
 
-	csrPEM, err := csr.Generate(cspSigner, cr)
+	csrPEM, err := gm.Generate(cspSigner, cr, key.(coreBccsp.Key))
+
 	if err != nil {
 		log.Debugf("failed generating CSR: %s", err)
 		return nil, nil, err
