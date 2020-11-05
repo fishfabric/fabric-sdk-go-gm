@@ -16,6 +16,8 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/sm2"
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 )
 
 func PrivateKeyToDER(privateKey *ecdsa.PrivateKey) ([]byte, error) {
@@ -23,7 +25,20 @@ func PrivateKeyToDER(privateKey *ecdsa.PrivateKey) ([]byte, error) {
 		return nil, errors.New("invalid ecdsa private key. It must be different from nil")
 	}
 
-	return x509.MarshalECPrivateKey(privateKey)
+	res, err := x509.MarshalECPrivateKey(privateKey)
+	if err != nil {
+		sm2PublicKey := sm2.PublicKey{
+			Curve: privateKey.PublicKey.Curve,
+			X:     privateKey.PublicKey.X,
+			Y:     privateKey.PublicKey.Y,
+		}
+		sm2PrivateKey := &sm2.PrivateKey{
+			PublicKey: sm2PublicKey,
+			D:         privateKey.D,
+		}
+		res, err = x509GM.MarshalSm2UnecryptedPrivateKey(sm2PrivateKey)
+	}
+	return res, err
 }
 
 func derToPrivateKey(der []byte) (key interface{}, err error) {
@@ -42,6 +57,10 @@ func derToPrivateKey(der []byte) (key interface{}, err error) {
 	}
 
 	if key, err = x509.ParseECPrivateKey(der); err == nil {
+		return
+	}
+
+	if key, err = x509GM.ParsePKCS8UnecryptedPrivateKey(der); err == nil {
 		return
 	}
 
