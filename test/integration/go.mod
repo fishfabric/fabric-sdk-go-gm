@@ -14,6 +14,7 @@ replace (
 )
 
 require (
+	github.com/Hyperledger-TWGC/tjfoc-gm v0.0.0-20201027032413-de75d571dd85
 	github.com/golang/protobuf v1.4.2
 	github.com/hyperledger/fabric-config v0.0.5
 	github.com/hyperledger/fabric-protos-go v0.0.0-20200707132912-fee30f3ccd23
