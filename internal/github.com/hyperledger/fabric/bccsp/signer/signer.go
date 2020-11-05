@@ -12,13 +12,13 @@ package signer
 
 import (
 	"crypto"
-	"crypto/x509"
-	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"io"
 
 	"github.com/pkg/errors"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
+
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 )
 
 // bccspCryptoSigner is the BCCSP-based implementation of a crypto.Signer
@@ -53,7 +53,7 @@ func New(csp core.CryptoSuite, key core.Key) (crypto.Signer, error) {
 		return nil, errors.Wrap(err, "failed marshalling public key")
 	}
 
-	pk, err := x509.ParsePKIXPublicKey(raw)
+	pk, err := x509GM.ParsePKIXPublicKey(raw)
 	if err != nil {
 		pk, err = x509GM.ParsePKIXPublicKey(raw)
 		if err != nil {
