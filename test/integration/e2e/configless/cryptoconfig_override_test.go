@@ -43,7 +43,7 @@ func (m *exampleIsSecurityEnabled) IsSecurityEnabled() bool {
 type exampleSecurityAlgorithm struct{}
 
 func (m *exampleSecurityAlgorithm) SecurityAlgorithm() string {
-	return "SHA2"
+	return "SM3"
 }
 
 type exampleSecurityLevel struct{}
@@ -55,7 +55,7 @@ func (m *exampleSecurityLevel) SecurityLevel() int {
 type exampleSecurityProvider struct{}
 
 func (m *exampleSecurityProvider) SecurityProvider() string {
-	return "sw"
+	return "gm"
 }
 
 type exampleSoftVerify struct{}
