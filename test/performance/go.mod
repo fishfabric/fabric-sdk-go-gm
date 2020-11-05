@@ -7,13 +7,13 @@ module github.com/tw-bc-group/fabric-sdk-go-gm/test/performance
 replace github.com/tw-bc-group/fabric-sdk-go-gm => ../../
 
 require (
-	github.com/golang/protobuf v1.3.3
+	github.com/golang/protobuf v1.4.2
 	github.com/hyperledger/fabric-protos-go v0.0.0-20200707132912-fee30f3ccd23
-	github.com/tw-bc-group/fabric-sdk-go-gm v0.0.0-00010101000000-000000000000
 	github.com/pkg/errors v0.8.1
 	github.com/stretchr/testify v1.5.1
-	golang.org/x/net v0.0.0-20190613194153-d28f0bde5980
-	google.golang.org/grpc v1.29.1
+	github.com/tw-bc-group/fabric-sdk-go-gm v0.0.0-00010101000000-000000000000
+	golang.org/x/net v0.0.0-20200904194848-62affa334b73
+	google.golang.org/grpc v1.31.0
 )
 
 go 1.14

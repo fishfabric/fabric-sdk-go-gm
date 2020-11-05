@@ -14,7 +14,7 @@ import (
 	"crypto"
 	"crypto/ecdsa"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/keyutil"
+	keyutil "github.com/tw-bc-group/fabric-gm/bccsp/utils"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 	cspsigner "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/signer"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
@@ -49,7 +49,7 @@ func NewCspSigner(csp core.CryptoSuite, key core.Key) (crypto.Signer, error) {
 
 // PEMtoPrivateKey is a bridge for bccsp utils.PEMtoPrivateKey()
 func PEMtoPrivateKey(raw []byte, pwd []byte) (interface{}, error) {
-	return keyutil.PEMToPrivateKey(raw, pwd)
+	return keyutil.PEMtoPrivateKey(raw, pwd)
 }
 
 // PrivateKeyToDER marshals is bridge for utils.PrivateKeyToDER
