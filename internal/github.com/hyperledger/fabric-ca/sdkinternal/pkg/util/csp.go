@@ -52,7 +52,9 @@ func getBCCSPKeyOpts(kr *csr.KeyRequest, ephemeral bool) (opts core.KeyGenOpts, 
 	case "ecdsa":
 		switch kr.Size() {
 		case 256:
-			return factory.GetECDSAP256KeyGenOpts(ephemeral), nil
+			return factory.GetGMSM2KeyKeyGenOpts(ephemeral), nil
+			//TODO-gm: 需要兼容以前算法
+			//return factory.GetECDSAP256KeyGenOpts(ephemeral), nil
 		case 384:
 			return factory.GetECDSAP384KeyGenOpts(ephemeral), nil
 		case 521:
