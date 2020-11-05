@@ -23,8 +23,8 @@ import (
 	"reflect"
 
 	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 	"github.com/tw-bc-group/fabric-gm/bccsp/utils"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 )
 
 //实现内部的 KeyImporter 接口
@@ -187,6 +187,21 @@ func (ki *x509PublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bc
 			der,
 			&bccsp.GMSM2PublicKeyImportOpts{Temporary: opts.Ephemeral()})
 	case *ecdsa.PublicKey:
+		ecdsaPukey := pk.(*ecdsa.PublicKey)
+		if ecdsaPukey.Curve == sm2.P256Sm2() {
+			sm2PublickKey := &sm2.PublicKey{
+				Curve: ecdsaPukey.Curve,
+				X: ecdsaPukey.X,
+				Y: ecdsaPukey.Y,
+			}
+			der, err := x509.MarshalSm2PublicKey(sm2PublickKey)
+			if err != nil {
+				return nil, errors.New("MarshalSm2PublicKey error")
+			}
+			return ki.bccsp.keyImporters[reflect.TypeOf(&bccsp.GMSM2PublicKeyImportOpts{})].KeyImport(
+				der,
+				&bccsp.GMSM2PublicKeyImportOpts{Temporary: opts.Ephemeral()})
+		}
 		return ki.bccsp.keyImporters[reflect.TypeOf(&bccsp.ECDSAGoPublicKeyImportOpts{})].KeyImport(
 			pk,
 			&bccsp.ECDSAGoPublicKeyImportOpts{Temporary: opts.Ephemeral()})
