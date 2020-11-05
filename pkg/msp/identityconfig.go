@@ -21,6 +21,8 @@ import (
 
 	"io/ioutil"
 
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/gm"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/endpoint"
@@ -284,7 +286,12 @@ func appendCertsFromPEM(c commtls.CertPool, pemCerts []byte) (ok bool) {
 
 		cert, err := x509.ParseCertificate(block.Bytes)
 		if err != nil {
-			continue
+			gmCert, err := x509GM.ParseCertificate(block.Bytes)
+			if err == nil {
+				cert = gm.ParseSm2Certificate2X509(gmCert)
+			} else {
+				continue
+			}
 		}
 
 		c.Add(cert)
