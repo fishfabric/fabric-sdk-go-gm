@@ -31,6 +31,8 @@ import (
 	"github.com/Hyperledger-TWGC/tjfoc-gm/sm2"
 	"github.com/tw-bc-group/fabric-gm/bccsp/utils"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
+
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 )
 
 // NewFileBasedKeyStore instantiated a file-based key store at a given position.
@@ -252,7 +254,8 @@ func (ks *fileBasedKeyStore) getSuffix(alias string) string {
 }
 
 func (ks *fileBasedKeyStore) storePrivateKey(alias string, privateKey interface{}) error {
-	rawKey, err := utils.PrivateKeyToPEM(privateKey, ks.pwd)
+
+	rawKey, err := x509GM.WritePrivateKeytoPem(privateKey.(*sm2.PrivateKey), ks.pwd)
 	if err != nil {
 		logger.Errorf("Failed converting private key to PEM [%s]: [%s]", alias, err)
 		return err
