@@ -52,9 +52,7 @@ func getBCCSPKeyOpts(kr *csr.KeyRequest, ephemeral bool) (opts core.KeyGenOpts, 
 	case "ecdsa":
 		switch kr.Size() {
 		case 256:
-			return factory.GetGMSM2KeyKeyGenOpts(ephemeral), nil
-			//TODO-gm: 需要兼容以前算法
-			//return factory.GetECDSAP256KeyGenOpts(ephemeral), nil
+			return factory.GetECDSAP256KeyGenOpts(ephemeral), nil
 		case 384:
 			return factory.GetECDSAP384KeyGenOpts(ephemeral), nil
 		case 521:
@@ -125,7 +123,10 @@ func BCCSPKeyRequestGenerate(req *csr.CertificateRequest, myCSP core.CryptoSuite
 	}
 	key, err := myCSP.KeyGen(keyOpts)
 	if err != nil {
-		return nil, nil, err
+		key, err = myCSP.KeyGen(factory.GetGMSM2KeyKeyGenOpts(false))
+		if err != nil {
+			return nil, nil, err
+		}
 	}
 	cspSigner, err := factory.NewCspSigner(myCSP, key)
 	if err != nil {
