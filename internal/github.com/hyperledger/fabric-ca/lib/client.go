@@ -14,6 +14,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/gm"
 	"io/ioutil"
 	"net"
 	"net/http"
@@ -37,9 +39,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/api"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/util"
 	log "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/logbridge"
-
-	coreBccsp "github.com/tw-bc-group/fabric-gm/bccsp"
-	gm "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/gm"
 )
 
 // Client is the fabric-ca client object
@@ -208,10 +207,22 @@ func (c *Client) GenCSR(req *api.CSRInfo, id string) ([]byte, core.Key, error) {
 		return nil, nil, err
 	}
 
-	csrPEM, err := gm.Generate(cspSigner, cr, key.(coreBccsp.Key))
+	csrPEM, err := csr.Generate(cspSigner, cr)
 
 	if err != nil {
-		log.Debugf("failed generating CSR: %s", err)
+		keyBytes, err := key.Bytes()
+
+		if err == nil {
+			sm2PrivateKey, err := x509GM.ParsePKCS8UnecryptedPrivateKey(keyBytes)
+			if err == nil {
+				csrPEM, err = gm.Generate(cspSigner, cr, sm2PrivateKey)
+			}
+		}
+
+		if err != nil {
+			log.Debugf("failed generating CSR: %s", err)
+		}
+
 		return nil, nil, err
 	}
 

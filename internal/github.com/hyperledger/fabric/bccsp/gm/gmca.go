@@ -8,22 +8,21 @@ import (
 	"crypto/x509/pkix"
 	"encoding/asn1"
 	"fmt"
-	"github.com/cloudflare/cfssl/csr"
-	"github.com/cloudflare/cfssl/log"
-	"github.com/tjfoc/gmsm/sm2"
-	"github.com/tw-bc-group/fabric-gm/bccsp"
-	"github.com/tw-bc-group/fabric-gm/bccsp/gm"
 	"io"
 	"math/big"
 	"net"
 	"net/mail"
 	"time"
 
+	"github.com/Hyperledger-TWGC/tjfoc-gm/sm2"
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
+	"github.com/cloudflare/cfssl/csr"
+	"github.com/cloudflare/cfssl/log"
 	"github.com/cloudflare/cfssl/signer"
 )
 
 // add by thoughtwork's matrix
-func OverrideHosts(template *sm2.Certificate, hosts []string) {
+func OverrideHosts(template *x509GM.Certificate, hosts []string) {
 	if hosts != nil {
 		template.IPAddresses = []net.IP{}
 		template.EmailAddresses = []string{}
@@ -79,9 +78,9 @@ type subjectPublicKeyInfo struct {
 	SubjectPublicKey asn1.BitString
 }
 
-func ComputeSKI(template *sm2.Certificate) ([]byte, error) {
+func ComputeSKI(template x509GM.Certificate) ([]byte, error) {
 	pub := template.PublicKey
-	encodedPub, err := sm2.MarshalPKIXPublicKey(pub)
+	encodedPub, err := x509GM.MarshalPKIXPublicKey(pub)
 	if err != nil {
 		return nil, err
 	}
@@ -133,8 +132,8 @@ var (
 )
 
 //证书请求转换成证书  参数为  block .Bytes
-func parseCertificateRequest(csrBytes []byte) (template *sm2.Certificate, err error) {
-	csrv, err := sm2.ParseCertificateRequest(csrBytes)
+func parseCertificateRequest(csrBytes []byte) (template *x509GM.Certificate, err error) {
+	csrv, err := x509GM.ParseCertificateRequest(csrBytes)
 	if err != nil {
 		//err = cferr.Wrap(cferr.CSRError, cferr.ParseFailed, err)
 		return
@@ -144,7 +143,7 @@ func parseCertificateRequest(csrBytes []byte) (template *sm2.Certificate, err er
 	// 	//err = cferr.Wrap(cferr.CSRError, cferr.KeyMismatch, err)
 	// 	return
 	// }
-	template = &sm2.Certificate{
+	template = &x509GM.Certificate{
 		Subject:            csrv.Subject,
 		PublicKeyAlgorithm: csrv.PublicKeyAlgorithm,
 		PublicKey:          csrv.PublicKey,
@@ -196,14 +195,14 @@ func parseCertificateRequest(csrBytes []byte) (template *sm2.Certificate, err er
 }
 
 //cloudflare 证书请求 转成 国密证书请求
-func Generate(priv crypto.Signer, req *csr.CertificateRequest, key bccsp.Key) (csr []byte, err error) {
+func Generate(priv crypto.Signer, req *csr.CertificateRequest, key *sm2.PrivateKey) (csr []byte, err error) {
 	log.Info("xx entry gm generate")
 	sigAlgo := signerAlgo(priv)
-	if sigAlgo == sm2.UnknownSignatureAlgorithm {
-		return nil, fmt.Errorf("Private key is unavailable")
+	if sigAlgo == x509GM.UnknownSignatureAlgorithm {
+		return nil, fmt.Errorf("private key is unavailable")
 	}
 	log.Info("xx begin create sm2.CertificateRequest")
-	var tpl = sm2.CertificateRequest{
+	var tpl = x509GM.CertificateRequest{
 		Subject:            req.Name(),
 		SignatureAlgorithm: sigAlgo,
 	}
@@ -227,22 +226,22 @@ func Generate(priv crypto.Signer, req *csr.CertificateRequest, key bccsp.Key) (c
 	if req.SerialNumber != "" {
 
 	}
-	csr, err = gm.CreateSm2CertificateRequestToMem(&tpl, key)
+	csr, err = CreateSm2CertificateRequestToMem(&tpl, key)
 	log.Info("xx exit generate")
 	return csr, err
 }
 
-func signerAlgo(priv crypto.Signer) sm2.SignatureAlgorithm {
+func signerAlgo(priv crypto.Signer) x509GM.SignatureAlgorithm {
 	switch pub := priv.Public().(type) {
 	case *sm2.PublicKey:
 		switch pub.Curve {
 		case sm2.P256Sm2():
-			return sm2.SM2WithSM3
+			return x509GM.SM2WithSM3
 		default:
-			return sm2.SM2WithSM3
+			return x509GM.SM2WithSM3
 		}
 	default:
-		return sm2.UnknownSignatureAlgorithm
+		return x509GM.UnknownSignatureAlgorithm
 	}
 }
 
@@ -269,12 +268,12 @@ func appendCAInfoToCSR(reqConf *csr.CAConfig, csreq *x509.CertificateRequest) er
 }
 
 // appendCAInfoToCSR appends CAConfig BasicConstraint extension to a CSR
-func appendCAInfoToCSRSm2(reqConf *csr.CAConfig, csreq *sm2.CertificateRequest) error {
+func appendCAInfoToCSRSm2(reqConf *csr.CAConfig, csreq *x509GM.CertificateRequest) error {
 	pathlen := reqConf.PathLength
 	if pathlen == 0 && !reqConf.PathLenZero {
 		pathlen = -1
 	}
-	val, err := asn1.Marshal(csr.BasicConstraints{true, pathlen})
+	val, err := asn1.Marshal(csr.BasicConstraints{IsCA: true, MaxPathLen: pathlen})
 
 	if err != nil {
 		return err

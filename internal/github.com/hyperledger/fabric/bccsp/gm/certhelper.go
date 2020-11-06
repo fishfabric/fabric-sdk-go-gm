@@ -89,9 +89,8 @@ func CreateCertificateToMem(template, parent *x509GM.Certificate, key bccsp.Key)
 }
 
 //调用SM2接口生成SM2证书请求
-func CreateSm2CertificateRequestToMem(certificateRequest *x509GM.CertificateRequest, key bccsp.Key) (csr []byte, err error) {
-	pk := key.(*gmsm2PrivateKey).privKey
-	csr, err = x509GM.CreateCertificateRequestToPem(certificateRequest, pk)
+func CreateSm2CertificateRequestToMem(certificateRequest *x509GM.CertificateRequest, privateKey *sm2.PrivateKey) (csr []byte, err error) {
+	csr, err = x509GM.CreateCertificateRequestToPem(certificateRequest, privateKey)
 	return
 }
 
