@@ -2,6 +2,7 @@ package gm
 
 import (
 	"crypto"
+	"crypto/ecdsa"
 	"crypto/rand"
 	"crypto/sha1"
 	"crypto/x509"
@@ -233,13 +234,13 @@ func Generate(priv crypto.Signer, req *csr.CertificateRequest, key *sm2.PrivateK
 
 func signerAlgo(priv crypto.Signer) x509GM.SignatureAlgorithm {
 	switch pub := priv.Public().(type) {
-	case *sm2.PublicKey:
-		switch pub.Curve {
-		case sm2.P256Sm2():
-			return x509GM.SM2WithSM3
-		default:
+	case *ecdsa.PublicKey:
+		if pub.Curve == sm2.P256Sm2() {
 			return x509GM.SM2WithSM3
 		}
+		return x509GM.UnknownSignatureAlgorithm
+	case *sm2.PublicKey:
+		return x509GM.SM2WithSM3
 	default:
 		return x509GM.UnknownSignatureAlgorithm
 	}

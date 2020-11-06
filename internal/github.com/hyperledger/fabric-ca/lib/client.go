@@ -216,6 +216,9 @@ func (c *Client) GenCSR(req *api.CSRInfo, id string) ([]byte, core.Key, error) {
 			sm2PrivateKey, err := x509GM.ParsePKCS8UnecryptedPrivateKey(keyBytes)
 			if err == nil {
 				csrPEM, err = gm.Generate(cspSigner, cr, sm2PrivateKey)
+				if err == nil {
+					return csrPEM, key, nil
+				}
 			}
 		}
 
