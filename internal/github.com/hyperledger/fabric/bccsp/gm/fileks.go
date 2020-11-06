@@ -20,7 +20,6 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"github.com/tjfoc/gmsm/sm4"
 	"io/ioutil"
 	"os"
@@ -320,8 +319,7 @@ func (ks *fileBasedKeyStore) loadPrivateKey(alias string) (interface{}, error) {
 		return nil, err
 	}
 
-	// privateKey, err := utils.PEMtoPrivateKey(raw, ks.pwd)
-	privateKey, err := x509.ReadPrivateKeyFromPem(raw, nil)
+	privateKey, err := x509GM.ReadPrivateKeyFromPem(raw, ks.pwd)
 	if err != nil {
 		logger.Errorf("Failed parsing private key [%s]: [%s].", alias, err.Error())
 
@@ -343,7 +341,7 @@ func (ks *fileBasedKeyStore) loadPublicKey(alias string) (interface{}, error) {
 	}
 
 	// privateKey, err := utils.PEMtoPublicKey(raw, ks.pwd)
-	privateKey, err := x509.ReadPrivateKeyFromPem(raw, nil)
+	privateKey, err := x509GM.ReadPrivateKeyFromPem(raw, nil)
 	if err != nil {
 		logger.Errorf("Failed parsing private key [%s]: [%s].", alias, err.Error())
 

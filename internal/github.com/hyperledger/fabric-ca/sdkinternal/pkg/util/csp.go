@@ -29,6 +29,7 @@ import (
 	"encoding/pem"
 	"fmt"
 	"github.com/Hyperledger-TWGC/tjfoc-gm/sm2"
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"io/ioutil"
 	"strings"
 
@@ -158,19 +159,9 @@ func ImportBCCSPKeyFromPEMBytes(keyBuff []byte, myCSP core.CryptoSuite, temporar
 	}
 	switch key.(type) {
 	case *sm2.PrivateKey:
-		sm2PrivateKey := key.(*sm2.PrivateKey)
-		ecdsaPublicKey := ecdsa.PublicKey{
-			Curve: sm2PrivateKey.PublicKey.Curve,
-			X:     sm2PrivateKey.PublicKey.X,
-			Y:     sm2PrivateKey.PublicKey.Y,
-		}
-		ecdsaPrivateKey := ecdsa.PrivateKey{
-			PublicKey: ecdsaPublicKey,
-			D:         sm2PrivateKey.D,
-		}
-		priv, err := factory.PrivateKeyToDER(&ecdsaPrivateKey)
+		priv, err := x509GM.MarshalSm2UnecryptedPrivateKey(key.(*sm2.PrivateKey))
 		if err != nil {
-			return nil, errors.WithMessage(err, fmt.Sprintf("Failed to convert ECDSA private key for '%s'", keyFile))
+			return nil, errors.WithMessage(err, fmt.Sprintf("Failed to convert sm2 private key for '%s'", keyFile))
 		}
 		sk, err := myCSP.KeyImport(priv, factory.GetGMSM2PrivateKeyImportOpts(temporary))
 		if err != nil {
