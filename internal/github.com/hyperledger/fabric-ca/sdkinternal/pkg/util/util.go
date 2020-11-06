@@ -23,11 +23,11 @@ package util
 import (
 	"bytes"
 	"crypto/ecdsa"
+	"crypto/x509"
 	"encoding/base64"
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
-	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"io/ioutil"
 	"math/big"
 	mrand "math/rand"
@@ -216,12 +216,12 @@ func HTTPResponseToString(resp *http.Response) string {
 }
 
 // GetX509CertificateFromPEM get an X509 certificate from bytes in PEM format
-func GetX509CertificateFromPEM(cert []byte) (*x509GM.Certificate, error) {
+func GetX509CertificateFromPEM(cert []byte) (*x509.Certificate, error) {
 	block, _ := pem.Decode(cert)
 	if block == nil {
 		return nil, errors.New("Failed to PEM decode certificate")
 	}
-	x509Cert, err := x509GM.ParseCertificate(block.Bytes)
+	x509Cert, err := x509.ParseCertificate(block.Bytes)
 	if err != nil {
 		return nil, errors.Wrap(err, "Error parsing certificate")
 	}
@@ -238,7 +238,7 @@ func GetEnrollmentIDFromPEM(cert []byte) (string, error) {
 }
 
 // GetEnrollmentIDFromX509Certificate returns the EnrollmentID from the X509 certificate
-func GetEnrollmentIDFromX509Certificate(cert *x509GM.Certificate) string {
+func GetEnrollmentIDFromX509Certificate(cert *x509.Certificate) string {
 	return cert.Subject.CommonName
 }
 

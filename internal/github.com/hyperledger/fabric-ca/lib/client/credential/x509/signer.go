@@ -11,8 +11,9 @@ Please review third_party pinning scripts and patches for more details.
 package x509
 
 import (
+	"crypto/x509"
 	"fmt"
-	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
+
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 
 	"github.com/pkg/errors"
@@ -43,7 +44,7 @@ type Signer struct {
 	// Certificate bytes
 	certBytes []byte
 	// X509 certificate that is constructed from the cert bytes associated with this signer
-	cert *x509GM.Certificate
+	cert *x509.Certificate
 	// Common name from the certificate associated with this signer
 	name string
 }
@@ -59,7 +60,7 @@ func (s *Signer) Cert() []byte {
 }
 
 // GetX509Cert returns the X509 certificate for this signer
-func (s *Signer) GetX509Cert() *x509GM.Certificate {
+func (s *Signer) GetX509Cert() *x509.Certificate {
 	return s.cert
 }
 

@@ -16,11 +16,11 @@ Please review third_party pinning scripts and patches for more details.
 package attrmgr
 
 import (
+	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
 	"encoding/json"
 	"fmt"
-	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 
 	"github.com/pkg/errors"
 )
@@ -57,7 +57,7 @@ type Mgr struct{}
 
 // ProcessAttributeRequestsForCert add attributes to an X509 certificate, given
 // attribute requests and attributes.
-func (mgr *Mgr) ProcessAttributeRequestsForCert(requests []AttributeRequest, attributes []Attribute, cert *x509GM.Certificate) error {
+func (mgr *Mgr) ProcessAttributeRequestsForCert(requests []AttributeRequest, attributes []Attribute, cert *x509.Certificate) error {
 	attrs, err := mgr.ProcessAttributeRequests(requests, attributes)
 	if err != nil {
 		return err
@@ -94,7 +94,7 @@ func (mgr *Mgr) ProcessAttributeRequests(requests []AttributeRequest, attributes
 }
 
 // AddAttributesToCert adds public attribute info to an X509 certificate.
-func (mgr *Mgr) AddAttributesToCert(attrs *Attributes, cert *x509GM.Certificate) error {
+func (mgr *Mgr) AddAttributesToCert(attrs *Attributes, cert *x509.Certificate) error {
 	buf, err := json.Marshal(attrs)
 	if err != nil {
 		return errors.Wrap(err, "Failed to marshal attributes")
@@ -109,7 +109,7 @@ func (mgr *Mgr) AddAttributesToCert(attrs *Attributes, cert *x509GM.Certificate)
 }
 
 // GetAttributesFromCert gets the attributes from a certificate.
-func (mgr *Mgr) GetAttributesFromCert(cert *x509GM.Certificate) (*Attributes, error) {
+func (mgr *Mgr) GetAttributesFromCert(cert *x509.Certificate) (*Attributes, error) {
 	// Get certificate attributes from the certificate if it exists
 	buf, err := getAttributesFromCert(cert)
 	if err != nil {
@@ -171,7 +171,7 @@ func (a *Attributes) True(name string) error {
 }
 
 // Get the attribute info from a certificate extension, or return nil if not found
-func getAttributesFromCert(cert *x509GM.Certificate) ([]byte, error) {
+func getAttributesFromCert(cert *x509.Certificate) ([]byte, error) {
 	for _, ext := range cert.Extensions {
 		if isAttrOID(ext.Id) {
 			return ext.Value, nil
