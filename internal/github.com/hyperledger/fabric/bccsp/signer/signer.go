@@ -12,6 +12,7 @@ package signer
 
 import (
 	"crypto"
+	"crypto/x509"
 	"io"
 
 	"github.com/pkg/errors"
@@ -55,7 +56,7 @@ func New(csp core.CryptoSuite, key core.Key) (crypto.Signer, error) {
 
 	pk, err := x509GM.ParsePKIXPublicKey(raw)
 	if err != nil {
-		pk, err = x509GM.ParsePKIXPublicKey(raw)
+		pk, err = x509.ParsePKIXPublicKey(raw)
 		if err != nil {
 			return nil, errors.Wrap(err, "failed marshalling der to public key")
 		}

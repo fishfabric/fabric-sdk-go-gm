@@ -28,6 +28,10 @@ func PrivateKeyToDER(privateKey *ecdsa.PrivateKey) ([]byte, error) {
 
 func derToPrivateKey(der []byte) (key interface{}, err error) {
 
+	if key, err = x509GM.ParsePKCS8UnecryptedPrivateKey(der); err == nil {
+		return
+	}
+
 	if key, err = x509.ParsePKCS1PrivateKey(der); err == nil {
 		return key, nil
 	}
@@ -45,9 +49,6 @@ func derToPrivateKey(der []byte) (key interface{}, err error) {
 		return
 	}
 
-	if key, err = x509GM.ParsePKCS8UnecryptedPrivateKey(der); err == nil {
-		return
-	}
 
 	return nil, errors.New("invalid key type. The DER must contain an ecdsa.PrivateKey")
 }

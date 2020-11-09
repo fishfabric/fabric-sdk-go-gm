@@ -1166,7 +1166,6 @@ func (c *EndpointConfig) loadAllTLSConfig(configEntity *endpointConfigEntity) er
 	if err != nil {
 		return errors.WithMessage(err, "failed to load TLS client certs ")
 	}
-
 	return nil
 }
 
@@ -1418,20 +1417,19 @@ func (c *EndpointConfig) loadTLSClientCerts(configEntity *endpointConfigEntity) 
 	// Load private key from cert using default crypto suite
 	cs := cryptosuite.GetDefault()
 	pk, err := cryptoutil.GetPrivateKeyFromCert(cb, cs)
-
 	// If CryptoSuite fails to load private key from cert then load private key from config
 	if err != nil || pk == nil {
 		logger.Debugf("Reading pk from config, unable to retrieve from cert: %s", err)
-		tlsClientCerts, err := c.loadPrivateKeyFromConfig(&configEntity.Client, clientCerts, cb)
+		gmtlsClientCerts, err := c.loadGMPrivateKeyFromConfig(&configEntity.Client, gmClientCerts, cb)
 		if err != nil {
-			gmtlsClientCerts, err := c.loadGMPrivateKeyFromConfig(&configEntity.Client, gmClientCerts, cb)
+			tlsClientCerts, err := c.loadPrivateKeyFromConfig(&configEntity.Client, clientCerts, cb)
 			if err != nil {
 				return errors.WithMessage(err, "failed to load TLS client certs")
 			}
-			c.gmtlsClientCerts = gmtlsClientCerts
+			c.tlsClientCerts = tlsClientCerts
 			return nil
 		}
-		c.tlsClientCerts = tlsClientCerts
+		c.gmtlsClientCerts = gmtlsClientCerts
 		return nil
 	}
 
@@ -1440,7 +1438,6 @@ func (c *EndpointConfig) loadTLSClientCerts(configEntity *endpointConfigEntity) 
 	if err != nil {
 		return errors.WithMessage(err, "failed to load TLS client certs, failed to get X509KeyPair")
 	}
-
 	c.tlsClientCerts = []tls.Certificate{clientCerts}
 	return nil
 }

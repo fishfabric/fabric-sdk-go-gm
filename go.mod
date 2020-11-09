@@ -9,7 +9,7 @@ go 1.14
 require (
 	github.com/Hyperledger-TWGC/tjfoc-gm v0.0.0-20201027032413-de75d571dd85
 	github.com/Knetic/govaluate v3.0.1-0.20170926212237-aa73cfd04eeb+incompatible
-	github.com/cloudflare/cfssl v1.4.1
+	github.com/cloudflare/cfssl v1.5.0
 	github.com/go-kit/kit v0.8.1-0.20190102110407-aed320776b71
 	github.com/golang/mock v1.4.3
 	github.com/golang/protobuf v1.4.2
@@ -34,9 +34,11 @@ require (
 	github.com/tjfoc/gmsm v1.3.2
 	github.com/tw-bc-group/fabric-gm v0.0.0-20201105075656-4ae0f4093603
 	github.com/tw-bc-group/net-go-gm v0.0.0-20201030055721-5906b2d70408
-	golang.org/x/crypto v0.0.0-20200728195943-123391ffb6de
-	golang.org/x/net v0.0.0-20200904194848-62affa334b73
+	golang.org/x/crypto v0.0.0-20201012173705-84dcc777aaee
+	golang.org/x/net v0.0.0-20201010224723-4f7140c49acb
 	google.golang.org/grpc v1.31.0
 	gopkg.in/fsnotify/fsnotify.v1 v1.4.7 // indirect
 	gopkg.in/yaml.v2 v2.3.0
 )
+
+replace github.com/Hyperledger-TWGC/tjfoc-gm v0.0.0-20201027032413-de75d571dd85 => github.com/tw-bc-group/tjfoc-gm v0.0.0-20201109071457-3ab3cddf8830

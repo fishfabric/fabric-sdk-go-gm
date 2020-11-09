@@ -29,7 +29,6 @@ import (
 	"encoding/pem"
 	"fmt"
 	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/gm"
 	"github.com/tw-bc-group/net-go-gm/http"
 	"io/ioutil"
 	"math/big"
@@ -223,13 +222,12 @@ func GetX509CertificateFromPEM(cert []byte) (*x509.Certificate, error) {
 	if block == nil {
 		return nil, errors.New("Failed to PEM decode certificate")
 	}
-	x509Cert, err := x509.ParseCertificate(block.Bytes)
+	x509Cert, err := x509GM.ParseSm2CertifateToX509(block.Bytes)
 	if err != nil {
-		x509GMCert, err := x509GM.ParseCertificate(block.Bytes)
+		x509Cert, err = x509.ParseCertificate(block.Bytes)
 		if err != nil {
 			return nil, errors.Wrap(err, "Error parsing certificate")
 		}
-		x509Cert = gm.ParseSm2Certificate2X509(x509GMCert)
 	}
 	return x509Cert, nil
 }

@@ -240,7 +240,6 @@ func (csp *CSP) GetKey(ski []byte) (k bccsp.Key, err error) {
 	if err != nil {
 		return nil, errors.Wrapf(err, "Failed getting key for SKI [%v]", ski)
 	}
-
 	return
 }
 

@@ -10,7 +10,6 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/gm"
 	"io/ioutil"
 	"strings"
 
@@ -112,18 +111,16 @@ func (cfg *TLSConfig) TLSCert() (*x509.Certificate, bool, error) {
 	block, _ := pem.Decode(cfg.bytes)
 
 	if block != nil {
-		pub, err := x509.ParseCertificate(block.Bytes)
+		pub, err := x509GM.ParseSm2CertifateToX509(block.Bytes)
 		if err != nil {
-			gmPub, err := x509GM.ParseCertificate(block.Bytes)
+			pub, err = x509.ParseCertificate(block.Bytes)
 			if err != nil {
 				return nil, false, errors.Wrap(err, "certificate parsing failed")
 			}
-			pub = gm.ParseSm2Certificate2X509(gmPub)
 		}
 
 		return pub, true, nil
 	}
-
 	//no cert found and there is no error
 	return nil, false, nil
 }

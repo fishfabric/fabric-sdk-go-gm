@@ -14,6 +14,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	cfsslapi "github.com/cloudflare/cfssl/api"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/lib/gmtls"
 	"io/ioutil"
 	"net"
@@ -25,7 +26,6 @@ import (
 	"strings"
 
 	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
-	cfsslapi "github.com/cloudflare/cfssl/api"
 	"github.com/cloudflare/cfssl/csr"
 	"github.com/mitchellh/mapstructure"
 	"github.com/pkg/errors"
@@ -35,7 +35,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/api"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/util"
 	log "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/logbridge"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/gm"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/net-go-gm/http"
 )
@@ -144,7 +143,7 @@ func (c *Client) initHTTPClient(serverName string) error {
 
 		tlsConfig, err2 := gmtls.GetClientTLSConfig(&c.Config.TLS, c.csp)
 		if err2 != nil {
-			return fmt.Errorf("Failed to get client TLS config: %s", err2)
+			return fmt.Errorf("failed to get client TLS config: %s", err2)
 		}
 		// set the default ciphers
 		tlsConfig.CipherSuites = gmtls.DefaultCipherSuites
@@ -205,26 +204,29 @@ func (c *Client) GenCSR(req *api.CSRInfo, id string) ([]byte, core.Key, error) {
 		return nil, nil, err
 	}
 
-	csrPEM, err := csr.Generate(cspSigner, cr)
+	keyBytes, err := key.Bytes()
 
 	if err != nil {
-		keyBytes, err := key.Bytes()
+		log.Debugf("failed load BCCSP key: %s", err)
+		return nil, nil, err
+	}
 
-		if err == nil {
-			sm2PrivateKey, err := x509GM.ParsePKCS8UnecryptedPrivateKey(keyBytes)
-			if err == nil {
-				csrPEM, err = gm.Generate(cspSigner, cr, sm2PrivateKey)
-				if err == nil {
-					return csrPEM, key, nil
-				}
-			}
-		}
+	sm2PrivateKey, err := x509GM.ParsePKCS8UnecryptedPrivateKey(keyBytes)
 
+	if err != nil {
+		log.Debugf("failed parse sm2 private key: %s", err)
+		return nil, nil, err
+	}
+
+	csrPEM, err := x509GM.GenerateCSRFromCfssl(cspSigner, cr, sm2PrivateKey)
+
+
+	if err != nil {
+		csrPEM, err = csr.Generate(cspSigner, cr)
 		if err != nil {
 			log.Debugf("failed generating CSR: %s", err)
+			return nil, nil, err
 		}
-
-		return nil, nil, err
 	}
 
 	return csrPEM, key, nil

@@ -122,9 +122,9 @@ func BCCSPKeyRequestGenerate(req *csr.CertificateRequest, myCSP core.CryptoSuite
 	if err != nil {
 		return nil, nil, err
 	}
-	key, err := myCSP.KeyGen(keyOpts)
+	key, err := myCSP.KeyGen(factory.GetGMSM2KeyKeyGenOpts(false))
 	if err != nil {
-		key, err = myCSP.KeyGen(factory.GetGMSM2KeyKeyGenOpts(false))
+		key, err = myCSP.KeyGen(keyOpts)
 		if err != nil {
 			return nil, nil, err
 		}

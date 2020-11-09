@@ -200,6 +200,7 @@ func (ks *fileBasedKeyStore) StoreKey(k bccsp.Key) (err error) {
 	return
 }
 
+
 func (ks *fileBasedKeyStore) searchKeystoreForSKI(ski []byte) (k bccsp.Key, err error) {
 
 	files, _ := ioutil.ReadDir(ks.path)
@@ -212,7 +213,7 @@ func (ks *fileBasedKeyStore) searchKeystoreForSKI(ski []byte) (k bccsp.Key, err 
 			continue
 		}
 
-		key, err := utils.PEMtoPrivateKey(raw, ks.pwd)
+		key, err := pemToPrivateKey(raw, ks.pwd)
 		if err != nil {
 			continue
 		}

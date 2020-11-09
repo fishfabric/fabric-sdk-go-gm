@@ -14,11 +14,11 @@ import (
 	"encoding/pem"
 	"io"
 
-	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"github.com/pkg/errors"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	factory "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/cryptosuitebridge"
 )
 
@@ -60,10 +60,10 @@ func GetPublicKeyFromCert(cert []byte, cs core.CryptoSuite) (core.Key, error) {
 
 	var x509Cert interface{}
 
-	x509Cert, err := x509.ParseCertificate(dcert.Bytes)
+	x509Cert, err := x509GM.ParseCertificate(dcert.Bytes)
 
 	if err != nil {
-		x509Cert, err = x509GM.ParseCertificate(dcert.Bytes)
+		x509Cert, err = x509.ParseCertificate(dcert.Bytes)
 		if err != nil {
 			return nil, errors.Errorf("Unable to parse cert from decoded bytes: %s", err)
 		}
