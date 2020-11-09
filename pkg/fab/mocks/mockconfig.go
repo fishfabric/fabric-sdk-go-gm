@@ -8,6 +8,8 @@ package mocks
 
 import (
 	"crypto/tls"
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/comm/gmtls"
 	"path/filepath"
 	"time"
 
@@ -34,6 +36,7 @@ type MockConfig struct {
 	customOrdererCfg       *fab.OrdererConfig
 	customRandomOrdererCfg *fab.OrdererConfig
 	CustomTLSCACertPool    commtls.CertPool
+	CustomGMTLSCACertPool  gmtls.CertPool
 	chConfig               map[string]*fab.ChannelEndpointConfig
 }
 
@@ -157,6 +160,15 @@ func (c *MockConfig) TLSCACertPool() commtls.CertPool {
 		return c.CustomTLSCACertPool
 	}
 	return &mockfab.MockCertPool{CertPool: x509.NewCertPool()}
+}
+
+func (c *MockConfig) GMTLSCACertPool() gmtls.CertPool {
+	if c.errorCase {
+		return &mockfab.MockGMCertPool{Err: errors.New("just to test error scenario")}
+	} else if c.CustomTLSCACertPool != nil {
+		return c.CustomGMTLSCACertPool
+	}
+	return &mockfab.MockGMCertPool{CertPool: x509GM.NewCertPool()}
 }
 
 // TcertBatchSize ...

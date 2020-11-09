@@ -33,6 +33,7 @@ require (
 	github.com/stretchr/testify v1.5.1
 	github.com/tjfoc/gmsm v1.3.2
 	github.com/tw-bc-group/fabric-gm v0.0.0-20201105075656-4ae0f4093603
+	github.com/tw-bc-group/net-go-gm v0.0.0-20201030055721-5906b2d70408
 	golang.org/x/crypto v0.0.0-20200728195943-123391ffb6de
 	golang.org/x/net v0.0.0-20200904194848-62affa334b73
 	google.golang.org/grpc v1.31.0

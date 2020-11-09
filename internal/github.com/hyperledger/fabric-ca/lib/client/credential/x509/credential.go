@@ -12,7 +12,6 @@ package x509
 
 import (
 	"encoding/hex"
-	"net/http"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 
@@ -23,6 +22,7 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/lib/client/credential"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/api"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/util"
+	"github.com/tw-bc-group/net-go-gm/http"
 )
 
 const (

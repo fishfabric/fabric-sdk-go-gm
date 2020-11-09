@@ -30,6 +30,7 @@ import (
 	"fmt"
 	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/gm"
+	"github.com/tw-bc-group/net-go-gm/http"
 	"io/ioutil"
 	"math/big"
 	mrand "math/rand"
@@ -37,7 +38,6 @@ import (
 	factory "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/cryptosuitebridge"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 
-	"net/http"
 	"os"
 	"path"
 	"path/filepath"

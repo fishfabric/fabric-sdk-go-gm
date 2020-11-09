@@ -11,9 +11,8 @@ Please review third_party pinning scripts and patches for more details.
 package credential
 
 import (
-	"net/http"
-
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/api"
+	"github.com/tw-bc-group/net-go-gm/http"
 )
 
 // Credential represents an credential of an identity

@@ -300,6 +300,8 @@ github.com/tjfoc/gmtls v1.2.1/go.mod h1:+mIfCjj3QuRGrW527hj12JLjI6DTt2MvBDxb3/86
 github.com/tmc/grpc-websocket-proxy v0.0.0-20170815181823-89b8d40f7ca8/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
 github.com/tw-bc-group/fabric-gm v0.0.0-20201105075656-4ae0f4093603 h1:7LaV0sHOc9CQ0V8yq2UsMvDNQjRYfnVR8+tDDNiZ2+s=
 github.com/tw-bc-group/fabric-gm v0.0.0-20201105075656-4ae0f4093603/go.mod h1:gJb66I64wonMJy4WqTHdaBHZcpF2WZeIPcdb4FoWaS8=
+github.com/tw-bc-group/net-go-gm v0.0.0-20201030055721-5906b2d70408 h1:SMXViaMOBbyeLwRUZ1FuT3yXXJ6omNA83wSPwPA15hY=
+github.com/tw-bc-group/net-go-gm v0.0.0-20201030055721-5906b2d70408/go.mod h1:AXgrqWHioYmKFNTKYNH3nVQi701PlOdUrD6dn7sIpCM=
 github.com/ugorji/go v1.1.1/go.mod h1:hnLbHMwcvSihnDhEfx2/BzKp2xb0Y+ErdfYcrs9tkJQ=
 github.com/urfave/cli v1.18.0/go.mod h1:70zkFmudgCuE/ngEzBv17Jvp/497gISqfk5gWijbERA=
 github.com/valyala/bytebufferpool v1.0.0/go.mod h1:6bBcMArwyJ5K/AmCkWv1jt77kVWyCJ6HpOuEn7z0Csc=

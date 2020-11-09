@@ -14,11 +14,9 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/gm"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/lib/gmtls"
 	"io/ioutil"
 	"net"
-	"net/http"
 	"net/url"
 	"os"
 	"path"
@@ -26,8 +24,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
-
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	cfsslapi "github.com/cloudflare/cfssl/api"
 	"github.com/cloudflare/cfssl/csr"
 	"github.com/mitchellh/mapstructure"
@@ -35,10 +32,12 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/lib/client/credential"
 	x509cred "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/lib/client/credential/x509"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/lib/streamer"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/lib/tls"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/api"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkinternal/pkg/util"
 	log "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/logbridge"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/gm"
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
+	"github.com/tw-bc-group/net-go-gm/http"
 )
 
 // Client is the fabric-ca client object
@@ -143,15 +142,14 @@ func (c *Client) initHTTPClient(serverName string) error {
 	if c.Config.TLS.Enabled {
 		log.Info("TLS Enabled")
 
-		tlsConfig, err2 := tls.GetClientTLSConfig(&c.Config.TLS, c.csp)
+		tlsConfig, err2 := gmtls.GetClientTLSConfig(&c.Config.TLS, c.csp)
 		if err2 != nil {
 			return fmt.Errorf("Failed to get client TLS config: %s", err2)
 		}
 		// set the default ciphers
-		tlsConfig.CipherSuites = tls.DefaultCipherSuites
+		tlsConfig.CipherSuites = gmtls.DefaultCipherSuites
 		//set the host name override
 		tlsConfig.ServerName = serverName
-
 		tr.TLSClientConfig = tlsConfig
 	}
 	c.httpClient = &http.Client{Transport: tr}
@@ -481,6 +479,7 @@ func (c *Client) SendReq(req *http.Request, result interface{}) (err error) {
 	}
 
 	resp, err := c.httpClient.Do(req)
+
 	if err != nil {
 		return errors.Wrapf(err, "%s failure of request: %s", req.Method, reqStr)
 	}

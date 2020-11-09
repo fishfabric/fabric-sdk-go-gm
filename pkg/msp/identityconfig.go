@@ -13,6 +13,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/comm/gmtls"
 	commtls "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/comm/tls"
 
 	"github.com/pkg/errors"
@@ -22,7 +23,6 @@ import (
 	"io/ioutil"
 
 	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/gm"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/msp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/endpoint"
@@ -59,6 +59,7 @@ type IdentityConfig struct {
 	credentialStorePath string
 	caMatchers          []matcherEntry
 	tlsCertPool         commtls.CertPool
+	gmtlsCertPool       gmtls.CertPool
 }
 
 //entityMatchers for identity configuration
@@ -169,6 +170,10 @@ func (c *IdentityConfig) TLSCACertPool() commtls.CertPool {
 	return c.tlsCertPool
 }
 
+func (c *IdentityConfig) GMTLSCACertPool() gmtls.CertPool {
+	return c.gmtlsCertPool
+}
+
 // CAKeyStorePath returns the same path as KeyStorePath() without the
 // 'keystore' directory added. This is done because the fabric-ca-client
 // adds this to the path
@@ -232,7 +237,10 @@ func (c *IdentityConfig) loadIdentityConfigEntities() error {
 
 	err = c.loadTLSCertPool(&configEntity)
 	if err != nil {
-		return errors.WithMessage(err, "failed to load TLS Cert Pool")
+		err = c.loadGMTLSCertPool(&configEntity)
+		if err != nil {
+			return errors.WithMessage(err, "failed to load TLS Cert Pool")
+		}
 	}
 
 	c.caKeyStorePath = pathvar.Subst(c.backend.GetString("client.credentialStore.cryptoStore.path"))
@@ -247,6 +255,7 @@ func (c *IdentityConfig) loadTLSCertPool(ce *identityConfigEntity) error {
 
 	var err error
 	c.tlsCertPool, err = commtls.NewCertPool(useSystemCertPool)
+
 	if err != nil {
 		return errors.WithMessage(err, "failed to create cert pool")
 	}
@@ -272,6 +281,62 @@ func (c *IdentityConfig) loadTLSCertPool(ce *identityConfigEntity) error {
 	return nil
 }
 
+func (c *IdentityConfig) loadGMTLSCertPool(ce *identityConfigEntity) error {
+
+	useSystemCertPool := ce.Client.TLSCerts.SystemCertPool
+
+	var err error
+	c.gmtlsCertPool, err = gmtls.NewCertPool(useSystemCertPool)
+
+	if err != nil {
+		return errors.WithMessage(err, "failed to create cert pool")
+	}
+
+	// preemptively add all TLS certs to cert pool as adding them at request time
+	// is expensive
+	for _, ca := range c.caConfigs {
+		if len(ca.TLSCAServerCerts) == 0 && !useSystemCertPool {
+			return errors.New(fmt.Sprintf("Org '%s' doesn't have defined tlsCACerts", ca.ID))
+		}
+		for _, cacert := range ca.TLSCAServerCerts {
+			ok := appendGMCertsFromPEM(c.gmtlsCertPool, cacert)
+			if !ok {
+				return errors.New("Failed to process certificate")
+			}
+		}
+	}
+
+	//update cert pool
+	if _, err := c.gmtlsCertPool.Get(); err != nil {
+		return errors.WithMessage(err, "cert pool load failed")
+	}
+	return nil
+}
+
+// see x509.AppendCertsFromPEM
+func appendGMCertsFromPEM(c gmtls.CertPool, pemCerts []byte) (ok bool) {
+	for len(pemCerts) > 0 {
+		var block *pem.Block
+		block, pemCerts = pem.Decode(pemCerts)
+		if block == nil {
+			break
+		}
+		if block.Type != "CERTIFICATE" || len(block.Headers) != 0 {
+			continue
+		}
+
+		cert, err := x509GM.ParseCertificate(block.Bytes)
+		if err != nil {
+			continue
+		}
+
+		c.Add(cert)
+		ok = true
+	}
+
+	return
+}
+
 // see x509.AppendCertsFromPEM
 func appendCertsFromPEM(c commtls.CertPool, pemCerts []byte) (ok bool) {
 	for len(pemCerts) > 0 {
@@ -286,12 +351,7 @@ func appendCertsFromPEM(c commtls.CertPool, pemCerts []byte) (ok bool) {
 
 		cert, err := x509.ParseCertificate(block.Bytes)
 		if err != nil {
-			gmCert, err := x509GM.ParseCertificate(block.Bytes)
-			if err == nil {
-				cert = gm.ParseSm2Certificate2X509(gmCert)
-			} else {
-				continue
-			}
+			continue
 		}
 
 		c.Add(cert)
