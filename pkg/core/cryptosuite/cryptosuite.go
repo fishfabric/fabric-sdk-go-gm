@@ -42,7 +42,7 @@ func GetDefault() core.CryptoSuite {
 		return defaultCryptoSuite
 	}
 	//Set default suite
-	logger.Info("No default cryptosuite found, using default SW implementation")
+	logger.Info("No default cryptosuite found, using default GM implementation")
 
 	// Use SW as the default cryptosuite when not initialized properly - should be for testing only
 	s, err := gm.GetSuiteWithDefaultEphemeral()
