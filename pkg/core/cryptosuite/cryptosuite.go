@@ -7,6 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package cryptosuite
 
 import (
+	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite/bccsp/gm"
 	"sync/atomic"
 
 	"errors"
@@ -16,7 +17,6 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/cryptosuite/bccsp/sw"
 )
 
 var logger = logging.NewLogger("fabsdk/core")
@@ -45,7 +45,7 @@ func GetDefault() core.CryptoSuite {
 	logger.Info("No default cryptosuite found, using default SW implementation")
 
 	// Use SW as the default cryptosuite when not initialized properly - should be for testing only
-	s, err := sw.GetSuiteWithDefaultEphemeral()
+	s, err := gm.GetSuiteWithDefaultEphemeral()
 	if err != nil {
 		logger.Panicf("Could not initialize default cryptosuite: %s", err)
 	}
