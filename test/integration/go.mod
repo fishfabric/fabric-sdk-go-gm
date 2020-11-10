@@ -6,6 +6,8 @@ module github.com/tw-bc-group/fabric-sdk-go-gm/test/integration
 
 replace github.com/tw-bc-group/fabric-sdk-go-gm => ../../
 
+replace github.com/Hyperledger-TWGC/tjfoc-gm v0.0.0-20201027032413-de75d571dd85 => github.com/tw-bc-group/tjfoc-gm v0.0.0-20201109071457-3ab3cddf8830
+
 require (
 	github.com/Hyperledger-TWGC/tjfoc-gm v0.0.0-20201027032413-de75d571dd85
 	github.com/golang/protobuf v1.4.2
