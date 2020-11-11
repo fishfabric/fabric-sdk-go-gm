@@ -9,6 +9,8 @@ package orderer
 import (
 	reqContext "context"
 	"crypto/x509"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/gmtls/gmcredentials"
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"io"
 	"time"
 
@@ -76,16 +78,23 @@ func New(config fab.EndpointConfig, opts ...Option) (*Orderer, error) {
 	}
 	grpcOpts = append(grpcOpts, grpc.WithDefaultCallOptions(grpc.WaitForReady(!orderer.failFast)))
 	if endpoint.AttemptSecured(orderer.url, orderer.allowInsecure) {
-		//tls config
-		tlsConfig, err := comm.TLSConfig(orderer.tlsCACert, orderer.serverName, config)
+		gmtlsConfig, err := comm.GMTLSConfig(orderer.tlsCACert, orderer.serverName, config)
 		if err != nil {
-			return nil, err
+			tlsConfig, err := comm.TLSConfig(orderer.tlsCACert, orderer.serverName, config)
+			if err != nil {
+				return nil, err
+			}
+			tlsConfig.VerifyPeerCertificate = func(rawCerts [][]byte, verifiedChains [][]*x509.Certificate) error {
+				return verifier.VerifyPeerCertificate(rawCerts, verifiedChains)
+			}
+			grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(credentials.NewTLS(tlsConfig)))
+		} else {
+			gmtlsConfig.VerifyPeerCertificate = func(rawCerts [][]byte, verifiedChains [][]*x509GM.Certificate) error {
+				return verifier.VerifyPeerGMCertificate(rawCerts, verifiedChains)
+			}
+			grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(gmcredentials.NewTLS(gmtlsConfig)))
 		}
-		tlsConfig.VerifyPeerCertificate = func(rawCerts [][]byte, verifiedChains [][]*x509.Certificate) error {
-			return verifier.VerifyPeerCertificate(rawCerts, verifiedChains)
-		}
-
-		grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(credentials.NewTLS(tlsConfig)))
+		//tls config
 	} else {
 		grpcOpts = append(grpcOpts, grpc.WithInsecure())
 	}

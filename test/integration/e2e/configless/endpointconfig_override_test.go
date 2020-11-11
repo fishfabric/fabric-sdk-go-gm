@@ -12,7 +12,6 @@ import (
 	"encoding/pem"
 	"fmt"
 	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp/gm"
 	"io/ioutil"
 	"regexp"
 	"strings"
@@ -786,11 +785,10 @@ func tlsCertByBytes(path string) *x509.Certificate {
 	if block != nil {
 		pub, err := x509.ParseCertificate(block.Bytes)
 		if err != nil {
-			gmPub, err := x509GM.ParseCertificate(block.Bytes)
+			pub, err = x509GM.ParseSm2CertifateToX509(block.Bytes)
 			if err != nil {
-				panic(err)
+				return nil
 			}
-			pub = gm.ParseSm2Certificate2X509(gmPub)
 		}
 
 		return pub

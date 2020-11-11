@@ -9,6 +9,7 @@ package fab
 import (
 	"crypto/tls"
 	"crypto/x509"
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	commgmtls "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/comm/gmtls"
 	"reflect"
 	"regexp"
@@ -1390,24 +1391,39 @@ func (c *EndpointConfig) loadChannelOrderers() error {
 func (c *EndpointConfig) loadTLSCertPool() error {
 
 	var err error
-	c.tlsCertPool, err = commtls.NewCertPool(c.backend.GetBool("client.tlsCerts.systemCertPool"))
+	c.gmtlsCertPool, err = commgmtls.NewCertPool(c.backend.GetBool("client.tlsCerts.systemCertPool"))
+	if err != nil {
+		c.tlsCertPool, err = commtls.NewCertPool(c.backend.GetBool("client.tlsCerts.systemCertPool"))
+	}
 	if err != nil {
 		return errors.WithMessage(err, "failed to create cert pool")
 	}
 
-	// preemptively add all TLS certs to cert pool as adding them at request time
-	// is expensive
-	certs, err := c.loadTLSCerts()
+	certs, err := c.loadGMTLSCerts()
+
 	if err != nil {
-		logger.Infof("could not cache TLS certs: %s", err)
+		// preemptively add all TLS certs to cert pool as adding them at request time
+		// is expensive
+		certs, err := c.loadTLSCerts()
+		if err != nil {
+			logger.Infof("could not cache TLS certs: %s", err)
+		}
+		//add certs to cert pool
+		c.tlsCertPool.Add(certs...)
+
+		//update cetr pool
+		if _, err := c.tlsCertPool.Get(); err != nil {
+			return errors.WithMessage(err, "cert pool load failed")
+		}
+	} else {
+		c.gmtlsCertPool.Add(certs...)
+
+		//update cetr pool
+		if _, err := c.gmtlsCertPool.Get(); err != nil {
+			return errors.WithMessage(err, "cert pool load failed")
+		}
 	}
 
-	//add certs to cert pool
-	c.tlsCertPool.Add(certs...)
-	//update cetr pool
-	if _, err := c.tlsCertPool.Get(); err != nil {
-		return errors.WithMessage(err, "cert pool load failed")
-	}
 	return nil
 }
 
@@ -1740,6 +1756,27 @@ func (c *EndpointConfig) verifyPeerConfig(p *fab.PeerConfig, peerName string, tl
 		return errors.Errorf("tls.certificate does not exist or empty for peer %s", peerName)
 	}
 	return nil
+}
+
+func (c *EndpointConfig) loadGMTLSCerts() ([]*x509GM.Certificate, error) {
+	var certs []*x509GM.Certificate
+	errs := multi.Errors{}
+
+	for _, peer := range c.networkPeers {
+		if peer.TLSCACert != nil {
+			gmCert := &x509GM.Certificate{}
+			gmCert.FromX509Certificate(peer.TLSCACert)
+			certs = append(certs, gmCert)
+		}
+	}
+	for _, orderer := range c.ordererConfigs {
+		if orderer.TLSCACert != nil {
+			gmCert := &x509GM.Certificate{}
+			gmCert.FromX509Certificate(orderer.TLSCACert)
+			certs = append(certs, gmCert)
+		}
+	}
+	return certs, errs.ToError()
 }
 
 func (c *EndpointConfig) loadTLSCerts() ([]*x509.Certificate, error) {

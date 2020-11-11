@@ -9,6 +9,8 @@ package peer
 import (
 	reqContext "context"
 	"crypto/x509"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/gmtls/gmcredentials"
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"regexp"
 	"time"
 
@@ -70,15 +72,23 @@ func newPeerEndorser(endorseReq *peerEndorserRequest) (*peerEndorser, error) {
 	grpcOpts = append(grpcOpts, grpc.WithDefaultCallOptions(grpc.WaitForReady(!endorseReq.failFast)))
 
 	if endpoint.AttemptSecured(endorseReq.target, endorseReq.allowInsecure) {
-		tlsConfig, err := comm.TLSConfig(endorseReq.certificate, endorseReq.serverHostOverride, endorseReq.config)
+		gmtlsConfig, err := comm.GMTLSConfig(endorseReq.certificate, endorseReq.serverHostOverride, endorseReq.config)
 		if err != nil {
-			return nil, err
+			tlsConfig, err := comm.TLSConfig(endorseReq.certificate, endorseReq.serverHostOverride, endorseReq.config)
+			if err != nil {
+				return nil, err
+			}
+			//verify if certificate was expired or not yet valid
+			tlsConfig.VerifyPeerCertificate = func(rawCerts [][]byte, verifiedChains [][]*x509.Certificate) error {
+				return verifier.VerifyPeerCertificate(rawCerts, verifiedChains)
+			}
+			grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(credentials.NewTLS(tlsConfig)))
+		} else {
+			gmtlsConfig.VerifyPeerCertificate = func(rawCerts [][]byte, verifiedChains [][]*x509GM.Certificate) error {
+				return verifier.VerifyPeerGMCertificate(rawCerts, verifiedChains)
+			}
+			grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(gmcredentials.NewTLS(gmtlsConfig)))
 		}
-		//verify if certificate was expired or not yet valid
-		tlsConfig.VerifyPeerCertificate = func(rawCerts [][]byte, verifiedChains [][]*x509.Certificate) error {
-			return verifier.VerifyPeerCertificate(rawCerts, verifiedChains)
-		}
-		grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(credentials.NewTLS(tlsConfig)))
 	} else {
 		grpcOpts = append(grpcOpts, grpc.WithInsecure())
 	}

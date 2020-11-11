@@ -13,7 +13,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/comm/gmtls"
+	commgmtls "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/comm/gmtls"
 	commtls "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/comm/tls"
 
 	"github.com/pkg/errors"
@@ -59,7 +59,7 @@ type IdentityConfig struct {
 	credentialStorePath string
 	caMatchers          []matcherEntry
 	tlsCertPool         commtls.CertPool
-	gmtlsCertPool       gmtls.CertPool
+	gmtlsCertPool       commgmtls.CertPool
 }
 
 //entityMatchers for identity configuration
@@ -170,7 +170,7 @@ func (c *IdentityConfig) TLSCACertPool() commtls.CertPool {
 	return c.tlsCertPool
 }
 
-func (c *IdentityConfig) GMTLSCACertPool() gmtls.CertPool {
+func (c *IdentityConfig) GMTLSCACertPool() commgmtls.CertPool {
 	return c.gmtlsCertPool
 }
 
@@ -254,30 +254,52 @@ func (c *IdentityConfig) loadTLSCertPool(ce *identityConfigEntity) error {
 	useSystemCertPool := ce.Client.TLSCerts.SystemCertPool
 
 	var err error
-	c.tlsCertPool, err = commtls.NewCertPool(useSystemCertPool)
+	c.gmtlsCertPool, err = commgmtls.NewCertPool(useSystemCertPool)
+	if err != nil {
+		c.tlsCertPool, err = commtls.NewCertPool(useSystemCertPool)
+	}
 
 	if err != nil {
 		return errors.WithMessage(err, "failed to create cert pool")
 	}
 
-	// preemptively add all TLS certs to cert pool as adding them at request time
-	// is expensive
-	for _, ca := range c.caConfigs {
-		if len(ca.TLSCAServerCerts) == 0 && !useSystemCertPool {
-			return errors.New(fmt.Sprintf("Org '%s' doesn't have defined tlsCACerts", ca.ID))
-		}
-		for _, cacert := range ca.TLSCAServerCerts {
-			ok := appendCertsFromPEM(c.tlsCertPool, cacert)
-			if !ok {
-				return errors.New("Failed to process certificate")
+	if c.gmtlsCertPool != nil {
+		for _, ca := range c.caConfigs {
+			if len(ca.TLSCAServerCerts) == 0 && !useSystemCertPool {
+				return errors.New(fmt.Sprintf("Org '%s' doesn't have defined tlsCACerts", ca.ID))
 			}
+			for _, cacert := range ca.TLSCAServerCerts {
+				ok := appendGMCertsFromPEM(c.gmtlsCertPool, cacert)
+				if !ok {
+					return errors.New("Failed to process certificate")
+				}
+			}
+		}
+
+		if _, err := c.gmtlsCertPool.Get(); err != nil {
+			return errors.WithMessage(err, "cert pool load failed")
+		}
+	} else {
+		// preemptively add all TLS certs to cert pool as adding them at request time
+		// is expensive
+		for _, ca := range c.caConfigs {
+			if len(ca.TLSCAServerCerts) == 0 && !useSystemCertPool {
+				return errors.New(fmt.Sprintf("Org '%s' doesn't have defined tlsCACerts", ca.ID))
+			}
+			for _, cacert := range ca.TLSCAServerCerts {
+				ok := appendCertsFromPEM(c.tlsCertPool, cacert)
+				if !ok {
+					return errors.New("Failed to process certificate")
+				}
+			}
+		}
+
+		//update cert pool
+		if _, err := c.tlsCertPool.Get(); err != nil {
+			return errors.WithMessage(err, "cert pool load failed")
 		}
 	}
 
-	//update cert pool
-	if _, err := c.tlsCertPool.Get(); err != nil {
-		return errors.WithMessage(err, "cert pool load failed")
-	}
 	return nil
 }
 
@@ -286,7 +308,7 @@ func (c *IdentityConfig) loadGMTLSCertPool(ce *identityConfigEntity) error {
 	useSystemCertPool := ce.Client.TLSCerts.SystemCertPool
 
 	var err error
-	c.gmtlsCertPool, err = gmtls.NewCertPool(useSystemCertPool)
+	c.gmtlsCertPool, err = commgmtls.NewCertPool(useSystemCertPool)
 
 	if err != nil {
 		return errors.WithMessage(err, "failed to create cert pool")
@@ -314,7 +336,7 @@ func (c *IdentityConfig) loadGMTLSCertPool(ce *identityConfigEntity) error {
 }
 
 // see x509.AppendCertsFromPEM
-func appendGMCertsFromPEM(c gmtls.CertPool, pemCerts []byte) (ok bool) {
+func appendGMCertsFromPEM(c commgmtls.CertPool, pemCerts []byte) (ok bool) {
 	for len(pemCerts) > 0 {
 		var block *pem.Block
 		block, pemCerts = pem.Decode(pemCerts)
