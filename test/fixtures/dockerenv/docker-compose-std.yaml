@@ -11,4 +11,4 @@ services:
     image: ${FABRIC_BASE_DOCKER_REGISTRY}${FABRIC_BASEIMAGE_FIXTURE_IMAGE}:${FABRIC_ARCH}${FABRIC_ARCH_SEP}${FABRIC_BASEIMAGE_FIXTURE_TAG}
     command: tail -F anything
     logging:
-      driver: none
+      driver: ${TEST_DC_LOGGING_DRIVER:-none}
