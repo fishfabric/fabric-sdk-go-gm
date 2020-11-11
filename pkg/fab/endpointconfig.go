@@ -9,6 +9,7 @@ package fab
 import (
 	"crypto/tls"
 	"crypto/x509"
+	commgmtls "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/comm/gmtls"
 	"reflect"
 	"regexp"
 	"strconv"
@@ -146,6 +147,7 @@ type EndpointConfig struct {
 	backend                  *lookup.ConfigLookup
 	networkConfig            *fab.NetworkConfig
 	tlsCertPool              commtls.CertPool
+	gmtlsCertPool            commgmtls.CertPool
 	entityMatchers           *entityMatchers
 	peerConfigsByOrg         map[string][]fab.PeerConfig
 	networkPeers             []fab.NetworkPeer
@@ -161,6 +163,14 @@ type EndpointConfig struct {
 	defaultOrdererConfig     fab.OrdererConfig
 	defaultChannelPolicies   fab.ChannelPolicies
 	defaultChannel           *fab.ChannelEndpointConfig
+}
+
+func (c *EndpointConfig) GMTLSCACertPool() commgmtls.CertPool {
+	return c.gmtlsCertPool
+}
+
+func (c *EndpointConfig) GMTLSClientCerts() []gmtls.Certificate {
+	return c.gmtlsClientCerts
 }
 
 //endpointConfigEntity contains endpoint config elements needed by endpointconfig
