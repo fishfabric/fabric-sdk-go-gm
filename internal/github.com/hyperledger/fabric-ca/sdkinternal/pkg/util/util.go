@@ -22,17 +22,24 @@ package util
 
 import (
 	"bytes"
-	"crypto/ecdsa"
+	"crypto"
+	ecdsa "crypto/ecdsa"
 	"crypto/x509"
+	"crypto/x509/pkix"
+	"encoding/asn1"
 	"encoding/base64"
 	"encoding/json"
 	"encoding/pem"
 	"fmt"
+	"github.com/Hyperledger-TWGC/tjfoc-gm/sm2"
 	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
+	"github.com/cloudflare/cfssl/csr"
 	"github.com/tw-bc-group/net-go-gm/http"
 	"io/ioutil"
 	"math/big"
 	mrand "math/rand"
+	"net"
+	"net/mail"
 
 	factory "github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric-ca/sdkpatch/cryptosuitebridge"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
@@ -318,4 +325,73 @@ func GetMaskedURL(url string) string {
 		url = url[:matchIdxs[0]] + matchStr + url[matchIdxs[1]:]
 	}
 	return url
+}
+
+func signerAlgo(priv crypto.Signer) x509GM.SignatureAlgorithm {
+	switch pub := priv.Public().(type) {
+	case *ecdsa.PublicKey:
+		if pub.Curve == sm2.P256Sm2() {
+			return x509GM.SM2WithSM3
+		}
+		return x509GM.UnknownSignatureAlgorithm
+	case *sm2.PublicKey:
+		return x509GM.SM2WithSM3
+	default:
+		return x509GM.UnknownSignatureAlgorithm
+	}
+}
+
+func appendCAInfoToCSRSm2(reqConf *csr.CAConfig, csreq *x509GM.CertificateRequest) error {
+	pathlen := reqConf.PathLength
+	if pathlen == 0 && !reqConf.PathLenZero {
+		pathlen = -1
+	}
+	val, err := asn1.Marshal(csr.BasicConstraints{IsCA: true, MaxPathLen: pathlen})
+
+	if err != nil {
+		return err
+	}
+
+	csreq.ExtraExtensions = []pkix.Extension{
+		{
+			Id:       asn1.ObjectIdentifier{2, 5, 29, 19},
+			Value:    val,
+			Critical: true,
+		},
+	}
+
+	return nil
+}
+
+func GenerateCSRFromCfssl(signer crypto.Signer, req *csr.CertificateRequest, privKey *sm2.PrivateKey) (csr []byte, err error) {
+	sigAlgo := signerAlgo(signer)
+	if sigAlgo == x509GM.UnknownSignatureAlgorithm {
+		return nil, fmt.Errorf("private key is unavailable")
+	}
+	var tpl = x509GM.CertificateRequest{
+		Subject:            req.Name(),
+		SignatureAlgorithm: sigAlgo,
+	}
+	for i := range req.Hosts {
+		if ip := net.ParseIP(req.Hosts[i]); ip != nil {
+			tpl.IPAddresses = append(tpl.IPAddresses, ip)
+		} else if email, err := mail.ParseAddress(req.Hosts[i]); err == nil && email != nil {
+			tpl.EmailAddresses = append(tpl.EmailAddresses, email.Address)
+		} else {
+			tpl.DNSNames = append(tpl.DNSNames, req.Hosts[i])
+		}
+	}
+
+	if req.CA != nil {
+		err = appendCAInfoToCSRSm2(req.CA, &tpl)
+		if err != nil {
+			err = fmt.Errorf("sm2 GenerationFailed")
+			return
+		}
+	}
+	if req.SerialNumber != "" {
+
+	}
+	csr, err = x509GM.CreateCertificateRequestToPem(&tpl, privKey)
+	return csr, err
 }

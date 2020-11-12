@@ -255,7 +255,7 @@ func (ks *fileBasedKeyStore) getSuffix(alias string) string {
 
 func (ks *fileBasedKeyStore) storePrivateKey(alias string, privateKey interface{}) error {
 
-	rawKey, err := x509GM.WritePrivateKeytoPem(privateKey.(*sm2.PrivateKey), ks.pwd)
+	rawKey, err := x509GM.WritePrivateKeyToMem(privateKey.(*sm2.PrivateKey), ks.pwd)
 	if err != nil {
 		logger.Errorf("Failed converting private key to PEM [%s]: [%s]", alias, err)
 		return err
@@ -320,7 +320,7 @@ func (ks *fileBasedKeyStore) loadPrivateKey(alias string) (interface{}, error) {
 		return nil, err
 	}
 
-	privateKey, err := x509GM.ReadPrivateKeyFromPem(raw, ks.pwd)
+	privateKey, err := x509GM.ReadPrivateKeyFromMem(raw, ks.pwd)
 	if err != nil {
 		logger.Errorf("Failed parsing private key [%s]: [%s].", alias, err.Error())
 
@@ -342,7 +342,7 @@ func (ks *fileBasedKeyStore) loadPublicKey(alias string) (interface{}, error) {
 	}
 
 	// privateKey, err := utils.PEMtoPublicKey(raw, ks.pwd)
-	privateKey, err := x509GM.ReadPrivateKeyFromPem(raw, nil)
+	privateKey, err := x509GM.ReadPrivateKeyFromMem(raw, nil)
 	if err != nil {
 		logger.Errorf("Failed parsing private key [%s]: [%s].", alias, err.Error())
 

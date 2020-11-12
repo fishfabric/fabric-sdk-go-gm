@@ -218,8 +218,7 @@ func (c *Client) GenCSR(req *api.CSRInfo, id string) ([]byte, core.Key, error) {
 		return nil, nil, err
 	}
 
-	csrPEM, err := x509GM.GenerateCSRFromCfssl(cspSigner, cr, sm2PrivateKey)
-
+	csrPEM, err := util.GenerateCSRFromCfssl(cspSigner, cr, sm2PrivateKey)
 
 	if err != nil {
 		csrPEM, err = csr.Generate(cspSigner, cr)
