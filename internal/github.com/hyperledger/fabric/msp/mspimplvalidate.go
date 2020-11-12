@@ -15,6 +15,7 @@ import (
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/asn1"
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"math/big"
 	"reflect"
 	"time"
@@ -69,6 +70,23 @@ func (msp *bccspmsp) validateCAIdentity(id *identity) error {
 	}
 
 	return msp.validateIdentityAgainstChain(id, validationChain)
+}
+
+func (msp *bccspmsp) validateGMTLSCAIdentity(cert *x509.Certificate, opts *x509GM.VerifyOptions) error {
+	if !cert.IsCA {
+		return errors.New("Only CA identities can be validated")
+	}
+
+	validationChain, err := msp.getGMUniqueValidationChain(cert, *opts)
+	if err != nil {
+		return errors.WithMessage(err, "could not obtain certification chain")
+	}
+	if len(validationChain) == 1 {
+		// validationChain[0] is the root CA certificate
+		return nil
+	}
+
+	return msp.validateCertAgainstChain(cert, validationChain)
 }
 
 func (msp *bccspmsp) validateTLSCAIdentity(cert *x509.Certificate, opts *x509.VerifyOptions) error {
@@ -289,6 +307,23 @@ func (msp *bccspmsp) getValidityOptsForCert(cert *x509.Certificate) x509.VerifyO
 
 	return tempOpts
 }
+
+func (msp *bccspmsp) getValidityOptsForGMCert(cert *x509.Certificate) x509GM.VerifyOptions {
+	// First copy the opts to override the CurrentTime field
+	// in order to make the certificate passing the expiration test
+	// independently from the real local current time.
+	// This is a temporary workaround for FAB-3678
+
+	var tempOpts x509GM.VerifyOptions
+	tempOpts.Roots = msp.gmopts.Roots
+	tempOpts.DNSName = msp.gmopts.DNSName
+	tempOpts.Intermediates = msp.gmopts.Intermediates
+	tempOpts.KeyUsages = msp.gmopts.KeyUsages
+	tempOpts.CurrentTime = cert.NotBefore.Add(time.Second)
+
+	return tempOpts
+}
+
 
 /*
    This is the definition of the ASN.1 marshalling of AuthorityKeyIdentifier

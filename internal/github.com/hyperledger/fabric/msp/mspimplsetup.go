@@ -15,6 +15,7 @@ import (
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"fmt"
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"time"
 
 	"github.com/golang/protobuf/proto"
@@ -25,9 +26,15 @@ import (
 
 func (msp *bccspmsp) getCertifiersIdentifier(certRaw []byte) ([]byte, error) {
 	// 1. check that certificate is registered in msp.rootCerts or msp.intermediateCerts
-	cert, err := msp.getCertFromPem(certRaw)
+	var cert *x509.Certificate
+	gmCert, err := msp.getGMCertFromPem(certRaw)
 	if err != nil {
-		return nil, fmt.Errorf("Failed getting certificate for [%v]: [%s]", certRaw, err)
+		cert, err = msp.getCertFromPem(certRaw)
+		if err != nil {
+			return nil, fmt.Errorf("Failed getting certificate for [%v]: [%s]", certRaw, err)
+		}
+	} else {
+		cert = gmCert.ToX509Certificate()
 	}
 
 	// 2. Sanitize it to ensure like for like comparison
@@ -116,19 +123,33 @@ func (msp *bccspmsp) setupCAs(conf *m.FabricMSPConfig) error {
 	// CA certificates. After their sanitization is done, the opts
 	// will be recreated using the sanitized certs.
 	msp.opts = &x509.VerifyOptions{Roots: x509.NewCertPool(), Intermediates: x509.NewCertPool()}
+	msp.gmopts = &x509GM.VerifyOptions{Roots: x509GM.NewCertPool(), Intermediates: x509GM.NewCertPool()}
+
 	for _, v := range conf.RootCerts {
-		cert, err := msp.getCertFromPem(v)
+		//add by tw matrix, 如果是国密证书，加入国密ca池子中
+		gmCert, err := msp.getGMCertFromPem(v)
 		if err != nil {
-			return err
+			cert, err := msp.getCertFromPem(v)
+			if err != nil {
+				return err
+			}
+			msp.opts.Roots.AddCert(cert)
+		} else {
+			msp.gmopts.Roots.AddCert(gmCert)
 		}
-		msp.opts.Roots.AddCert(cert)
 	}
+
 	for _, v := range conf.IntermediateCerts {
-		cert, err := msp.getCertFromPem(v)
+		gmCert, err := msp.getGMCertFromPem(v)
 		if err != nil {
-			return err
+			cert, err := msp.getCertFromPem(v)
+			if err != nil {
+				return err
+			}
+			msp.opts.Intermediates.AddCert(cert)
+		} else {
+			msp.gmopts.Intermediates.AddCert(gmCert)
 		}
-		msp.opts.Intermediates.AddCert(cert)
 	}
 
 	// Load root and intermediate CA identities
@@ -158,9 +179,15 @@ func (msp *bccspmsp) setupCAs(conf *m.FabricMSPConfig) error {
 	msp.opts = &x509.VerifyOptions{Roots: x509.NewCertPool(), Intermediates: x509.NewCertPool()}
 	for _, id := range msp.rootCerts {
 		msp.opts.Roots.AddCert(id.(*identity).cert)
+		gmCert := &x509GM.Certificate{}
+		gmCert.FromX509Certificate(id.(*identity).cert)
+		msp.gmopts.Roots.AddCert(gmCert)
 	}
 	for _, id := range msp.intermediateCerts {
 		msp.opts.Intermediates.AddCert(id.(*identity).cert)
+		gmCert := &x509GM.Certificate{}
+		gmCert.FromX509Certificate(id.(*identity).cert)
+		msp.gmopts.Intermediates.AddCert(gmCert)
 	}
 
 	return nil
@@ -425,33 +452,47 @@ func (msp *bccspmsp) setupOUs(conf *m.FabricMSPConfig) error {
 func (msp *bccspmsp) setupTLSCAs(conf *m.FabricMSPConfig) error {
 
 	opts := &x509.VerifyOptions{Roots: x509.NewCertPool(), Intermediates: x509.NewCertPool()}
+	gmopts := &x509GM.VerifyOptions{Roots: x509GM.NewCertPool(), Intermediates: x509GM.NewCertPool()}
 
 	// Load TLS root and intermediate CA identities
 	msp.tlsRootCerts = make([][]byte, len(conf.TlsRootCerts))
 	rootCerts := make([]*x509.Certificate, len(conf.TlsRootCerts))
 	for i, trustedCert := range conf.TlsRootCerts {
-		cert, err := msp.getCertFromPem(trustedCert)
+		var cert *x509.Certificate
+		gmCert, err := msp.getGMCertFromPem(trustedCert)
 		if err != nil {
-			return err
+			cert, err = msp.getCertFromPem(trustedCert)
+			if err != nil {
+				return err
+			}
+			opts.Roots.AddCert(cert)
+		} else {
+			cert = gmCert.ToX509Certificate()
+			gmopts.Roots.AddCert(gmCert)
 		}
 
 		rootCerts[i] = cert
 		msp.tlsRootCerts[i] = trustedCert
-		opts.Roots.AddCert(cert)
 	}
 
 	// make and fill the set of intermediate certs (if present)
 	msp.tlsIntermediateCerts = make([][]byte, len(conf.TlsIntermediateCerts))
 	intermediateCerts := make([]*x509.Certificate, len(conf.TlsIntermediateCerts))
 	for i, trustedCert := range conf.TlsIntermediateCerts {
-		cert, err := msp.getCertFromPem(trustedCert)
+		var cert *x509.Certificate
+		gmCert, err := msp.getGMCertFromPem(trustedCert)
 		if err != nil {
-			return err
+			cert, err = msp.getCertFromPem(trustedCert)
+			if err != nil {
+				return err
+			}
+			opts.Intermediates.AddCert(cert)
+		} else {
+			cert = gmCert.ToX509Certificate()
+			gmopts.Intermediates.AddCert(gmCert)
 		}
-
 		intermediateCerts[i] = cert
 		msp.tlsIntermediateCerts[i] = trustedCert
-		opts.Intermediates.AddCert(cert)
 	}
 
 	// ensure that our CAs are properly formed and that they are valid
@@ -467,8 +508,10 @@ func (msp *bccspmsp) setupTLSCAs(conf *m.FabricMSPConfig) error {
 			return errors.WithMessagef(err, "CA Certificate problem with Subject Key Identifier extension, (SN: %x)", cert.SerialNumber)
 		}
 
-		if err := msp.validateTLSCAIdentity(cert, opts); err != nil {
-			return errors.WithMessagef(err, "CA Certificate is not valid, (SN: %s)", cert.SerialNumber)
+		if err := msp.validateGMTLSCAIdentity(cert, gmopts); err != nil {
+			if err := msp.validateTLSCAIdentity(cert, opts); err != nil {
+				return errors.WithMessagef(err, "CA Certificate is not valid, (SN: %s)", cert.SerialNumber)
+			}
 		}
 	}
 

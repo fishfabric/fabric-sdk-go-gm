@@ -26,4 +26,4 @@ var ProjectPath = ""
 var TestRunID = ""
 
 // CCMode is an identifier for the cc mode: lifecycle or lscc
-var CCMode = "lifecycle"
+var CCMode = "lscc"

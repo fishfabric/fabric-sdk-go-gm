@@ -17,12 +17,13 @@ package gm
 
 import (
 	"crypto/ecdsa"
+	"crypto/x509"
 	"errors"
 	"fmt"
 	"github.com/Hyperledger-TWGC/tjfoc-gm/sm2"
 	"reflect"
 
-	"github.com/Hyperledger-TWGC/tjfoc-gm/x509"
+	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"github.com/tw-bc-group/fabric-gm/bccsp/utils"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
 )
@@ -56,7 +57,7 @@ func (*gmsm2PrivateKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bcc
 		return nil, errors.New("[GMSM2PrivateKeyImportOpts] Invalid raw. It must not be nil.")
 	}
 
-	gmsm2SK, err := x509.ParsePKCS8UnecryptedPrivateKey(der)
+	gmsm2SK, err := x509GM.ParsePKCS8UnecryptedPrivateKey(der)
 
 	if err != nil {
 		return nil, fmt.Errorf("Failed converting to GMSM2 private key [%s]", err)
@@ -77,7 +78,7 @@ func (*gmsm2PublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccs
 		return nil, errors.New("[GMSM2PublicKeyImportOpts] Invalid raw. It must not be nil.")
 	}
 
-	gmsm2SK, err := x509.ParseSm2PublicKey(der)
+	gmsm2SK, err := x509GM.ParseSm2PublicKey(der)
 	if err != nil {
 		return nil, fmt.Errorf("Failed converting to GMSM2 public key [%s]", err)
 	}
@@ -152,9 +153,14 @@ func (*ecdsaPKIXPublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts 
 
 func (ki *x509PublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccsp.KeyImportOpts) (k bccsp.Key, err error) {
 
-	sm2Cert, ok := raw.(*x509.Certificate)
+	sm2Cert, ok := raw.(*x509GM.Certificate)
 	if !ok {
-		return nil, errors.New("Invalid raw material. Expected *x509.Certificate.")
+		cert, ok := raw.(*x509.Certificate)
+		if !ok {
+			return nil, errors.New("Invalid raw material. Expected *x509GM.Certificate.")
+		}
+		sm2Cert = &x509GM.Certificate{}
+		sm2Cert.FromX509Certificate(cert)
 	}
 
 	pk := sm2Cert.PublicKey
@@ -165,7 +171,7 @@ func (ki *x509PublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bc
 		if !ok {
 			return nil, errors.New("Parse interface []  to sm2 pk error")
 		}
-		der, err := x509.MarshalSm2PublicKey(&sm2PublickKey)
+		der, err := x509GM.MarshalSm2PublicKey(&sm2PublickKey)
 		if err != nil {
 			return nil, errors.New("MarshalSm2PublicKey error")
 		}
@@ -179,7 +185,7 @@ func (ki *x509PublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bc
 		if !ok {
 			return nil, errors.New("Parse interface []  to sm2 pk error")
 		}
-		der, err := x509.MarshalSm2PublicKey(sm2PublickKey)
+		der, err := x509GM.MarshalSm2PublicKey(sm2PublickKey)
 		if err != nil {
 			return nil, errors.New("MarshalSm2PublicKey error")
 		}
@@ -194,7 +200,7 @@ func (ki *x509PublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bc
 				X: ecdsaPukey.X,
 				Y: ecdsaPukey.Y,
 			}
-			der, err := x509.MarshalSm2PublicKey(sm2PublickKey)
+			der, err := x509GM.MarshalSm2PublicKey(sm2PublickKey)
 			if err != nil {
 				return nil, errors.New("MarshalSm2PublicKey error")
 			}
