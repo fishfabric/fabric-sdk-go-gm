@@ -9,8 +9,6 @@ package orderer
 import (
 	reqContext "context"
 	"crypto/x509"
-	"github.com/Hyperledger-TWGC/tjfoc-gm/gmtls/gmcredentials"
-	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"io"
 	"time"
 
@@ -18,7 +16,6 @@ import (
 	"github.com/spf13/cast"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/multi"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
 	grpcstatus "google.golang.org/grpc/status"
 
@@ -29,8 +26,8 @@ import (
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/logging"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/context"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/comm"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/endpoint"
+	fabCommon "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/common"
 )
 
 var logger = logging.NewLogger("fabsdk/fab")
@@ -78,23 +75,11 @@ func New(config fab.EndpointConfig, opts ...Option) (*Orderer, error) {
 	}
 	grpcOpts = append(grpcOpts, grpc.WithDefaultCallOptions(grpc.WaitForReady(!orderer.failFast)))
 	if endpoint.AttemptSecured(orderer.url, orderer.allowInsecure) {
-		gmtlsConfig, err := comm.GMTLSConfig(orderer.tlsCACert, orderer.serverName, config)
+		grpcOpt, err := fabCommon.ConfigTLS(orderer.tlsCACert, orderer.serverName, config)
 		if err != nil {
-			tlsConfig, err := comm.TLSConfig(orderer.tlsCACert, orderer.serverName, config)
-			if err != nil {
-				return nil, err
-			}
-			tlsConfig.VerifyPeerCertificate = func(rawCerts [][]byte, verifiedChains [][]*x509.Certificate) error {
-				return verifier.VerifyPeerCertificate(rawCerts, verifiedChains)
-			}
-			grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(credentials.NewTLS(tlsConfig)))
-		} else {
-			gmtlsConfig.VerifyPeerCertificate = func(rawCerts [][]byte, verifiedChains [][]*x509GM.Certificate) error {
-				return verifier.VerifyPeerGMCertificate(rawCerts, verifiedChains)
-			}
-			grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(gmcredentials.NewTLS(gmtlsConfig)))
+			return nil, err
 		}
-		//tls config
+		grpcOpts = append(grpcOpts, grpcOpt)
 	} else {
 		grpcOpts = append(grpcOpts, grpc.WithInsecure())
 	}

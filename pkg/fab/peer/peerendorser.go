@@ -9,27 +9,23 @@ package peer
 import (
 	reqContext "context"
 	"crypto/x509"
-	"github.com/Hyperledger-TWGC/tjfoc-gm/gmtls/gmcredentials"
-	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"regexp"
 	"time"
 
 	"github.com/pkg/errors"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
 	grpcstatus "google.golang.org/grpc/status"
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/protoutil"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/client/common/verifier"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/errors/status"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/context"
-	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/comm"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/core/config/endpoint"
+	fabCommon "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/fab/common"
 )
 
 const (
@@ -72,23 +68,11 @@ func newPeerEndorser(endorseReq *peerEndorserRequest) (*peerEndorser, error) {
 	grpcOpts = append(grpcOpts, grpc.WithDefaultCallOptions(grpc.WaitForReady(!endorseReq.failFast)))
 
 	if endpoint.AttemptSecured(endorseReq.target, endorseReq.allowInsecure) {
-		gmtlsConfig, err := comm.GMTLSConfig(endorseReq.certificate, endorseReq.serverHostOverride, endorseReq.config)
+		grpcOpt, err := fabCommon.ConfigTLS(endorseReq.certificate, endorseReq.serverHostOverride, endorseReq.config)
 		if err != nil {
-			tlsConfig, err := comm.TLSConfig(endorseReq.certificate, endorseReq.serverHostOverride, endorseReq.config)
-			if err != nil {
-				return nil, err
-			}
-			//verify if certificate was expired or not yet valid
-			tlsConfig.VerifyPeerCertificate = func(rawCerts [][]byte, verifiedChains [][]*x509.Certificate) error {
-				return verifier.VerifyPeerCertificate(rawCerts, verifiedChains)
-			}
-			grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(credentials.NewTLS(tlsConfig)))
-		} else {
-			gmtlsConfig.VerifyPeerCertificate = func(rawCerts [][]byte, verifiedChains [][]*x509GM.Certificate) error {
-				return verifier.VerifyPeerGMCertificate(rawCerts, verifiedChains)
-			}
-			grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(gmcredentials.NewTLS(gmtlsConfig)))
+			return nil, err
 		}
+		grpcOpts = append(grpcOpts, grpcOpt)
 	} else {
 		grpcOpts = append(grpcOpts, grpc.WithInsecure())
 	}
