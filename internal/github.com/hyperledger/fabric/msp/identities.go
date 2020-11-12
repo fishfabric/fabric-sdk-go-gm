@@ -15,8 +15,6 @@ import (
 	"crypto/rand"
 	"crypto/x509"
 	"encoding/hex"
-	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
-
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
 
 	"encoding/pem"
@@ -40,7 +38,6 @@ type identity struct {
 
 	// cert contains the x.509 certificate that signs the public key of this instance
 	cert *x509.Certificate
-	gmCert *x509GM.Certificate
 
 	// this is the public key of this instance
 	pk core.Key

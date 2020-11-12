@@ -735,6 +735,7 @@ func (msp *bccspmsp) getUniqueValidationChain(cert *x509.Certificate, opts x509.
 		return nil, errors.New("the supplied identity has no verify options")
 	}
 
+	//TODO
 	util.GenerateBytesUUID()
 
 	validationChains, err := cert.Verify(opts)
