@@ -14,7 +14,6 @@ require (
 	github.com/golang/mock v1.4.3
 	github.com/golang/protobuf v1.4.2
 	github.com/hashicorp/hcl v1.0.0 // indirect
-	github.com/hpcloud/tail v1.0.1-0.20180514194441-a1dbeea552b7 // indirect
 	github.com/hyperledger/fabric-config v0.0.5
 	github.com/hyperledger/fabric-lib-go v1.0.1-0.20181230093725-20a0acfb37ba
 	github.com/hyperledger/fabric-protos-go v0.0.0-20200707132912-fee30f3ccd23
@@ -32,13 +31,14 @@ require (
 	github.com/spf13/viper v1.1.1
 	github.com/stretchr/testify v1.5.1
 	github.com/tjfoc/gmsm v1.3.2
-	github.com/tw-bc-group/fabric-gm v0.0.0-20201105075656-4ae0f4093603
+	github.com/tw-bc-group/fabric-gm v0.0.0-20201112022540-d3810d6681a7
 	github.com/tw-bc-group/net-go-gm v0.0.0-20201030055721-5906b2d70408
 	golang.org/x/crypto v0.0.0-20201012173705-84dcc777aaee
-	golang.org/x/net v0.0.0-20201010224723-4f7140c49acb
+	golang.org/x/net v0.0.0-20201026091529-146b70c837a4
 	google.golang.org/grpc v1.31.0
-	gopkg.in/fsnotify/fsnotify.v1 v1.4.7 // indirect
 	gopkg.in/yaml.v2 v2.3.0
 )
 
-replace github.com/Hyperledger-TWGC/tjfoc-gm v0.0.0-20201027032413-de75d571dd85 => github.com/tw-bc-group/tjfoc-gm v0.0.0-20201109071457-3ab3cddf8830
+replace (
+	github.com/Hyperledger-TWGC/tjfoc-gm v0.0.0-20201027032413-de75d571dd85 => github.com/tw-bc-group/tjfoc-gm v0.0.0-20201111115702-d6eb42f3ea58
+)
