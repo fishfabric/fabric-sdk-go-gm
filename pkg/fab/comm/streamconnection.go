@@ -51,15 +51,14 @@ func NewStreamConnection(ctx fabcontext.Client, chConfig fab.ChannelCfg, streamP
 
 	peer, ok := peer.FromContext(stream.Context())
 	if !ok || peer == nil {
-		//return error - certificate is not available
+		// return error - certificate is not available
 		return nil, errors.Wrap(err, "No peer cert in GRPC stream")
-
 	}
 
 	if peer.AuthInfo != nil {
 		tlsInfo := peer.AuthInfo.(gmcredentials.TLSInfo)
 		for _, peercert := range tlsInfo.State.PeerCertificates {
-			err := verifier.ValidateCertificateDates(peercert.ToX509Certificate())
+			err := verifier.ValidateGMCertificateDates(peercert)
 			if err != nil {
 				logger.Error(err)
 				return nil, errors.Wrapf(err, "error validating certificate dates for [%v]", peercert.Subject)
