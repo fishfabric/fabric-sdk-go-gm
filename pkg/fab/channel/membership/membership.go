@@ -90,11 +90,11 @@ func areCertDatesValid(serializedID []byte) error {
 	if bl == nil {
 		return errors.New("could not decode the PEM structure")
 	}
-	cert, err := x509.ParseCertificate(bl.Bytes)
+	cert, err := x509GM.ParseCertificate(bl.Bytes)
 	if err != nil {
 		return err
 	}
-	err = verifier.ValidateCertificateDates(cert)
+	err = verifier.ValidateGMCertificateDates(cert)
 	if err != nil {
 		logger.Warnf("Certificate error '%s' for cert '%v'", err, cert.SerialNumber)
 		return err
