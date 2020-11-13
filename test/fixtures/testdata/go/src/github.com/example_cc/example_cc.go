@@ -27,9 +27,11 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/hyperledger/fabric-chaincode-go/shim"
-	pb "github.com/hyperledger/fabric-protos-go/peer"
+	"github.com/tw-bc-group/fabric-gm/core/chaincode/shim"
+	pb "github.com/tw-bc-group/fabric-gm/protos/peer"
 )
+
+var logger = shim.NewLogger("examplecc")
 
 // SimpleChaincode example simple Chaincode implementation
 type SimpleChaincode struct {
@@ -38,6 +40,7 @@ type SimpleChaincode struct {
 // Init ...
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
 	txID := stub.GetTxID()
+	logger.Debugf("[txID %s] ########### example_cc Init ###########\n", txID)
 	_, args := stub.GetFunctionAndParameters()
 
 	err := t.reset(stub, txID, args)
@@ -47,6 +50,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
 
 	if transientMap, err := stub.GetTransient(); err == nil {
 		if transientData, ok := transientMap["result"]; ok {
+			logger.Debugf("[txID %s] Transient data in 'init' : %s\n", txID, transientData)
 			return shim.Success(transientData)
 		}
 	}
@@ -82,6 +86,7 @@ func (t *SimpleChaincode) reset(stub shim.ChaincodeStubInterface, txID string, a
 	if err != nil {
 		return errors.New("Expecting integer value for asset holding")
 	}
+	logger.Debugf("[txID %s] Aval = %d, Bval = %d\n", txID, Aval, Bval)
 
 	// Write the state to the ledger
 	err = stub.PutState(A, []byte(strconv.Itoa(Aval)))
@@ -118,16 +123,18 @@ func (t *SimpleChaincode) set(stub shim.ChaincodeStubInterface, args []string) p
 		eventID = args[3]
 	}
 
+	logger.Debugf("Setting value for key[%s]", key)
+
 	// Write the state to the ledger
 	err = stub.PutState(key, []byte(value))
 	if err != nil {
-		fmt.Printf("Failed to set value for key[%s] : ", key, err)
+		logger.Errorf("Failed to set value for key[%s] : ", key, err)
 		return shim.Error(err.Error())
 	}
 
 	err = stub.SetEvent(eventID, []byte("Test Payload"))
 	if err != nil {
-		fmt.Printf("Failed to set event for key[%s] : ", key, err)
+		logger.Errorf("Failed to set event for key[%s] : ", key, err)
 		return shim.Error(err.Error())
 	}
 
@@ -137,6 +144,7 @@ func (t *SimpleChaincode) set(stub shim.ChaincodeStubInterface, args []string) p
 // Invoke ...
 // Transaction makes payment of X units from A to B
 func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
+	logger.Debugf("[txID %s] ########### example_cc Invoke ###########\n", stub.GetTxID())
 	function, args := stub.GetFunctionAndParameters()
 
 	if function == "invokecc" {
@@ -184,6 +192,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 }
 
 func (t *SimpleChaincode) move(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	txID := stub.GetTxID()
 	// must be an invoke
 	var A, B string    // Entities
 	var Aval, Bval int // Asset holdings
@@ -223,6 +232,7 @@ func (t *SimpleChaincode) move(stub shim.ChaincodeStubInterface, args []string) 
 	}
 	Aval = Aval - X
 	Bval = Bval + X
+	logger.Debugf("[txID %s] Aval = %d, Bval = %d\n", txID, Aval, Bval)
 
 	// Write the state back to the ledger
 	err = stub.PutState(A, []byte(strconv.Itoa(Aval)))
@@ -237,6 +247,7 @@ func (t *SimpleChaincode) move(stub shim.ChaincodeStubInterface, args []string) 
 
 	if transientMap, err := stub.GetTransient(); err == nil {
 		if transientData, ok := transientMap["result"]; ok {
+			logger.Debugf("[txID %s] Transient data in 'move' : %s\n", txID, transientData)
 			return shim.Success(transientData)
 		}
 	}
@@ -283,6 +294,8 @@ func (t *SimpleChaincode) query(stub shim.ChaincodeStubInterface, args []string)
 		return shim.Error(jsonResp)
 	}
 
+	jsonResp := "{\"Name\":\"" + A + "\",\"Amount\":\"" + string(Avalbytes) + "\"}"
+	logger.Debugf("[txID %s] Query Response:%s\n", stub.GetTxID(), jsonResp)
 	return shim.Success(Avalbytes)
 }
 
@@ -324,6 +337,6 @@ func (t *SimpleChaincode) invokeCC(stub shim.ChaincodeStubInterface, args []stri
 func main() {
 	err := shim.Start(new(SimpleChaincode))
 	if err != nil {
-		fmt.Printf("Error starting Simple chaincode: %s", err)
+		logger.Errorf("Error starting Simple chaincode: %s", err)
 	}
 }
