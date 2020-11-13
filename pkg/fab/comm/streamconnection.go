@@ -7,6 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package comm
 
 import (
+	"github.com/Hyperledger-TWGC/tjfoc-gm/gmtls/gmcredentials"
 	"sync"
 
 	"github.com/pkg/errors"
@@ -16,7 +17,6 @@ import (
 	fabcontext "github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/context"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/fab"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/peer"
 )
 
@@ -57,9 +57,9 @@ func NewStreamConnection(ctx fabcontext.Client, chConfig fab.ChannelCfg, streamP
 	}
 
 	if peer.AuthInfo != nil {
-		tlsInfo := peer.AuthInfo.(credentials.TLSInfo)
+		tlsInfo := peer.AuthInfo.(gmcredentials.TLSInfo)
 		for _, peercert := range tlsInfo.State.PeerCertificates {
-			err := verifier.ValidateCertificateDates(peercert)
+			err := verifier.ValidateCertificateDates(peercert.ToX509Certificate())
 			if err != nil {
 				logger.Error(err)
 				return nil, errors.Wrapf(err, "error validating certificate dates for [%v]", peercert.Subject)
