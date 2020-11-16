@@ -759,8 +759,6 @@ func (msp *bccspmsp) getGMUniqueValidationChain(cert *x509.Certificate, opts x50
 		return nil, errors.New("the supplied identity has no verify options")
 	}
 
-	util.GenerateBytesUUID()
-
 	gmCert := &x509GM.Certificate{}
 	gmCert.FromX509Certificate(cert)
 

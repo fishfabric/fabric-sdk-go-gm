@@ -255,8 +255,10 @@ func (msp *bccspmsp) finalizeSetupCAs() error {
 			return errors.WithMessagef(err, "CA Certificate problem with Subject Key Identifier extension, (SN: %x)", id.(*identity).cert.SerialNumber)
 		}
 
-		if err := msp.validateCAIdentity(id.(*identity)); err != nil {
-			return errors.WithMessagef(err, "CA Certificate is not valid, (SN: %s)", id.(*identity).cert.SerialNumber)
+		if err := msp.validateGMCAIdentity(id.(*identity)); err != nil {
+			if err := msp.validateCAIdentity(id.(*identity)); err != nil {
+				return errors.WithMessagef(err, "CA Certificate is not valid, (SN: %s)", id.(*identity).cert.SerialNumber)
+			}
 		}
 	}
 
@@ -264,9 +266,12 @@ func (msp *bccspmsp) finalizeSetupCAs() error {
 	// certification tree
 	msp.certificationTreeInternalNodesMap = make(map[string]bool)
 	for _, id := range append([]Identity{}, msp.intermediateCerts...) {
-		chain, err := msp.getUniqueValidationChain(id.(*identity).cert, msp.getValidityOptsForCert(id.(*identity).cert))
+		chain, err := msp.getGMUniqueValidationChain(id.(*identity).cert, msp.getValidityOptsForGMCert(id.(*identity).cert))
 		if err != nil {
-			return errors.WithMessagef(err, "failed getting validation chain, (SN: %s)", id.(*identity).cert.SerialNumber)
+			chain, err = msp.getUniqueValidationChain(id.(*identity).cert, msp.getValidityOptsForCert(id.(*identity).cert))
+			if err != nil {
+				return errors.WithMessagef(err, "failed getting validation chain, (SN: %s)", id.(*identity).cert.SerialNumber)
+			}
 		}
 
 		// Recall chain[0] is id.(*identity).id so it does not count as a parent

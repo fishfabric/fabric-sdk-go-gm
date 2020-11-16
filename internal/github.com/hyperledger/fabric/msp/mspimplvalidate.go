@@ -55,6 +55,24 @@ func (msp *bccspmsp) validateIdentity(id *identity) error {
 	return nil
 }
 
+
+func (msp *bccspmsp) validateGMCAIdentity(id *identity) error {
+	if !id.cert.IsCA {
+		return errors.New("Only CA identities can be validated")
+	}
+
+	validationChain, err := msp.getGMUniqueValidationChain(id.cert, msp.getValidityOptsForGMCert(id.cert))
+	if err != nil {
+		return errors.WithMessage(err, "could not obtain gm certification chain")
+	}
+	if len(validationChain) == 1 {
+		// validationChain[0] is the root CA certificate
+		return nil
+	}
+
+	return msp.validateIdentityAgainstChain(id, validationChain)
+}
+
 func (msp *bccspmsp) validateCAIdentity(id *identity) error {
 	if !id.cert.IsCA {
 		return errors.New("Only CA identities can be validated")
