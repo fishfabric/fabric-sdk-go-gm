@@ -167,6 +167,28 @@ func (msp *bccspmsp) getCertFromPem(idBytes []byte) (*x509.Certificate, error) {
 	return cert, nil
 }
 
+
+func (msp *bccspmsp) getPemsFromOnePem(idBytes []byte) ([][]byte, error) {
+	if idBytes == nil {
+		return nil, errors.New("getCertFromPem error: nil idBytes")
+	}
+
+	var blocks [][]byte
+
+	for len(idBytes) > 0 {
+		var block *pem.Block
+		block, idBytes = pem.Decode(idBytes)
+		if block == nil {
+			break
+		}
+
+		blocks = append(blocks, pem.EncodeToMemory(block))
+	}
+	// Decode the pem bytes
+
+	return blocks, nil
+}
+
 func (msp *bccspmsp) getGMCertFromPem(idBytes []byte) (*x509GM.Certificate, error) {
 	if idBytes == nil {
 		return nil, errors.New("getGMCertFromPem error: nil idBytes")
