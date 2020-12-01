@@ -85,6 +85,10 @@ func GetGMSM2KeyKeyGenOpts(ephemeral bool) core.KeyGenOpts {
 	return &bccsp.GMSM2KeyGenOpts{Temporary: ephemeral}
 }
 
+func GetZHCESM2KeyKeyGenOpts(ephemeral bool) core.KeyGenOpts {
+	return &bccsp.ZHCESM2KeyGenOpts{Temporary: ephemeral}
+}
+
 //GetECDSAP384KeyGenOpts options for ECDSA key generation with curve P-384.
 func GetECDSAP384KeyGenOpts(ephemeral bool) core.KeyGenOpts {
 	return &bccsp.ECDSAP384KeyGenOpts{Temporary: ephemeral}
@@ -104,7 +108,6 @@ func GetECDSAPrivateKeyImportOpts(ephemeral bool) core.KeyImportOpts {
 func GetGMSM2PrivateKeyImportOpts(ephemer bool) core.KeyImportOpts {
 	return &bccsp.GMSM2PrivateKeyImportOpts{Temporary: ephemer}
 }
-
 
 func GetGMSM2PublicKeyImportOpts(ephemer bool) core.KeyImportOpts {
 	return &bccsp.GMSM2PublicKeyImportOpts{Temporary: ephemer}

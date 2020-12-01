@@ -30,6 +30,7 @@ import (
 	"fmt"
 	"github.com/Hyperledger-TWGC/tjfoc-gm/sm2"
 	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
+	"golang.org/x/tools/go/ssa/interp/testdata/src/os"
 	"io/ioutil"
 	"strings"
 
@@ -122,7 +123,13 @@ func BCCSPKeyRequestGenerate(req *csr.CertificateRequest, myCSP core.CryptoSuite
 	if err != nil {
 		return nil, nil, err
 	}
-	key, err := myCSP.KeyGen(factory.GetGMSM2KeyKeyGenOpts(false))
+	var key core.Key
+	if os.Getenv("ZHONGHUAN_CE_ON") == "ON" {
+		key, err = myCSP.KeyGen(factory.GetZHCESM2KeyKeyGenOpts(false))
+	}
+	if err != nil {
+		key, err = myCSP.KeyGen(factory.GetGMSM2KeyKeyGenOpts(false))
+	}
 	if err != nil {
 		key, err = myCSP.KeyGen(keyOpts)
 		if err != nil {

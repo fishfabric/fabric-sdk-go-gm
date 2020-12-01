@@ -44,6 +44,9 @@ const (
 	// GMSM2
 	GMSM2 = "GMSM2"
 
+	// ZhongHuan 协同加密 SM2
+	ZHCESM2 = "ZHCESM2"
+
 	// HMAC keyed-hash message authentication code
 	HMAC = "HMAC"
 	// HMACTruncated256 HMAC truncated at 256 bits.
@@ -270,6 +273,22 @@ func (opts *X509PublicKeyImportOpts) Algorithm() string {
 	return X509Certificate
 }
 
+// ZHCESM2KeyGenOpts contains options for ZHCESM2 key generation.
+type ZHCESM2KeyGenOpts struct {
+	Temporary bool
+}
+
+// Algorithm returns the key generation algorithm identifier (to be used).
+func (opts *ZHCESM2KeyGenOpts) Algorithm() string {
+	return ZHCESM2
+}
+
+// Ephemeral returns true if the key to generate has to be ephemeral,
+// false otherwise.
+func (opts *ZHCESM2KeyGenOpts) Ephemeral() bool {
+	return opts.Temporary
+}
+
 // GMSM2KeyGenOpts contains options for GMSM2 key generation.
 type GMSM2KeyGenOpts struct {
 	Temporary bool
@@ -349,7 +368,6 @@ func (opts *GMSM2PublicKeyImportOpts) Algorithm() string {
 func (opts *GMSM2PublicKeyImportOpts) Ephemeral() bool {
 	return opts.Temporary
 }
-
 
 // Ephemeral returns true if the key to generate has to be ephemeral,
 // false otherwise.
