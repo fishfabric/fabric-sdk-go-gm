@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"github.com/Hyperledger-TWGC/tjfoc-gm/sm2"
 	"github.com/tw-bc-group/fabric-sdk-go-gm/internal/github.com/hyperledger/fabric/bccsp"
+	sm2ZH "github.com/tw-bc-group/zhonghuan-ce/sm2"
 )
 
 //定义国密SM2 keygen 结构体，实现 KeyGenerator 接口
@@ -32,6 +33,19 @@ func (gm *gmsm2KeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (k bccsp.Key, err err
 	}
 
 	return &gmsm2PrivateKey{privKey}, nil
+}
+
+//定义中环协同SM2 keygen 结构体，实现 KeyGenerator 接口
+type zhcesm2KeyGenerator struct{}
+
+func (gm *zhcesm2KeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (k bccsp.Key, err error) {
+	//调用中环协同SM2的注册证书方法
+	adapter, err := sm2ZH.CreateSm2KeyAdapter("")
+	if err != nil {
+		return nil, fmt.Errorf("failed generating ZHCESM2 key  [%s]", err)
+	}
+
+	return &zhcesm2KeyAdapter{adapter}, nil
 }
 
 //定义国密SM4 keygen 结构体，实现 KeyGenerator 接口

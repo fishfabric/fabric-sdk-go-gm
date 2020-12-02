@@ -124,10 +124,11 @@ func BCCSPKeyRequestGenerate(req *csr.CertificateRequest, myCSP core.CryptoSuite
 		return nil, nil, err
 	}
 	var key core.Key
-	if os.Getenv("ZHONGHUAN_CE_ON") == "ON" {
+	zhonghuanCeOn := os.Getenv("ZHONGHUAN_CE_ON")
+	if zhonghuanCeOn == "ON" {
 		key, err = myCSP.KeyGen(factory.GetZHCESM2KeyKeyGenOpts(false))
 	}
-	if err != nil {
+	if zhonghuanCeOn != "ON" || err != nil {
 		key, err = myCSP.KeyGen(factory.GetGMSM2KeyKeyGenOpts(false))
 	}
 	if err != nil {

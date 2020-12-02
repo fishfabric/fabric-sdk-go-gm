@@ -118,6 +118,7 @@ func New(keyStore bccsp.KeyStore) (bccsp.BCCSP, error) {
 
 	// Set the key generators
 	keyGenerators := make(map[reflect.Type]KeyGenerator)
+	keyGenerators[reflect.TypeOf(&bccsp.ZHCESM2KeyGenOpts{})] = &zhcesm2KeyGenerator{}
 	keyGenerators[reflect.TypeOf(&bccsp.GMSM2KeyGenOpts{})] = &gmsm2KeyGenerator{}
 	keyGenerators[reflect.TypeOf(&bccsp.GMSM4KeyGenOpts{})] = &gmsm4KeyGenerator{length: 32}
 	csp.keyGenerators = keyGenerators
