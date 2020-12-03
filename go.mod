@@ -31,16 +31,14 @@ require (
 	github.com/spf13/viper v1.1.1
 	github.com/stretchr/testify v1.6.1
 	github.com/tjfoc/gmsm v1.3.2
-	github.com/tw-bc-group/fabric-gm v0.0.0-20201112022540-d3810d6681a7
+	github.com/tw-bc-group/aliyun-kms v0.0.0-20201126132256-b9c99bba772d // indirect
+	github.com/tw-bc-group/fabric-gm v0.0.0-20201202083234-25adec505e63
 	github.com/tw-bc-group/net-go-gm v0.0.0-20201030055721-5906b2d70408
-	github.com/tw-bc-group/zhonghuan-ce v0.1.0
+	github.com/tw-bc-group/zhonghuan-ce v0.0.0-20201202033808-e0dd07d946ea
 	golang.org/x/crypto v0.0.0-20201012173705-84dcc777aaee
 	golang.org/x/net v0.0.0-20201026091529-146b70c837a4
-	golang.org/x/tools v0.0.0-20201023174141-c8cfbd0f21e6
 	google.golang.org/grpc v1.31.0
 	gopkg.in/yaml.v2 v2.3.0
 )
 
-replace (
-	github.com/Hyperledger-TWGC/tjfoc-gm v0.0.0-20201027032413-de75d571dd85 => github.com/tw-bc-group/tjfoc-gm v0.0.0-20201111115702-d6eb42f3ea58
-)
+replace github.com/Hyperledger-TWGC/tjfoc-gm v0.0.0-20201117155542-9542a21fafd1 => github.com/tw-bc-group/tjfoc-gm v0.0.0-20201126034628-7141b2053e0e
