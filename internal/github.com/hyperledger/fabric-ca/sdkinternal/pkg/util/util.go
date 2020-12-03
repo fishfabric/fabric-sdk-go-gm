@@ -34,6 +34,7 @@ import (
 	"github.com/Hyperledger-TWGC/tjfoc-gm/sm2"
 	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"github.com/cloudflare/cfssl/csr"
+	"github.com/spf13/viper"
 	"github.com/tw-bc-group/net-go-gm/http"
 	"io/ioutil"
 	"math/big"
@@ -394,4 +395,8 @@ func GenerateCSRFromCfssl(signer crypto.Signer, req *csr.CertificateRequest, pri
 	}
 	csr, err = x509GM.CreateCertificateRequestToPem(&tpl, privKey)
 	return csr, err
+}
+
+func ZhonghuanCEIsOn() bool {
+	return viper.GetBool("ZHONGHUAN_CE_ON")
 }

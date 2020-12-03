@@ -31,7 +31,6 @@ import (
 	"github.com/Hyperledger-TWGC/tjfoc-gm/sm2"
 	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
 	"io/ioutil"
-	"os"
 	"strings"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
@@ -124,17 +123,18 @@ func BCCSPKeyRequestGenerate(req *csr.CertificateRequest, myCSP core.CryptoSuite
 		return nil, nil, err
 	}
 	var key core.Key
-	zhonghuanCeOn := os.Getenv("ZHONGHUAN_CE_ON")
-	if zhonghuanCeOn == "ON" {
+	if ZhonghuanCEIsOn() {
 		key, err = myCSP.KeyGen(factory.GetZHCESM2KeyKeyGenOpts(false))
-	}
-	if zhonghuanCeOn != "ON" || err != nil {
-		key, err = myCSP.KeyGen(factory.GetGMSM2KeyKeyGenOpts(false))
-	}
-	if err != nil {
-		key, err = myCSP.KeyGen(keyOpts)
 		if err != nil {
 			return nil, nil, err
+		}
+	} else {
+		key, err = myCSP.KeyGen(factory.GetGMSM2KeyKeyGenOpts(false))
+		if err != nil {
+			key, err = myCSP.KeyGen(keyOpts)
+			if err != nil {
+				return nil, nil, err
+			}
 		}
 	}
 	cspSigner, err := factory.NewCspSigner(myCSP, key)
