@@ -31,10 +31,9 @@ require (
 	github.com/spf13/viper v1.1.1
 	github.com/stretchr/testify v1.6.1
 	github.com/tjfoc/gmsm v1.3.2
-	github.com/tw-bc-group/aliyun-kms v0.0.0-20201126132256-b9c99bba772d // indirect
 	github.com/tw-bc-group/fabric-gm v0.0.0-20201202083234-25adec505e63
 	github.com/tw-bc-group/net-go-gm v0.0.0-20201030055721-5906b2d70408
-	github.com/tw-bc-group/zhonghuan-ce v0.0.0-20201202033808-e0dd07d946ea
+	github.com/tw-bc-group/zhonghuan-ce v0.1.1
 	golang.org/x/crypto v0.0.0-20201012173705-84dcc777aaee
 	golang.org/x/net v0.0.0-20201026091529-146b70c837a4
 	google.golang.org/grpc v1.31.0
