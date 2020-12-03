@@ -30,8 +30,8 @@ import (
 	"fmt"
 	"github.com/Hyperledger-TWGC/tjfoc-gm/sm2"
 	x509GM "github.com/Hyperledger-TWGC/tjfoc-gm/x509"
-	"golang.org/x/tools/go/ssa/interp/testdata/src/os"
 	"io/ioutil"
+	"os"
 	"strings"
 
 	"github.com/tw-bc-group/fabric-sdk-go-gm/pkg/common/providers/core"
